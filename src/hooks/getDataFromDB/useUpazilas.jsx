@@ -1,24 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../axios/useAxiosSecure";
 
-const useDistricts = () => {
+const useUpazilas = () => {
   const axiosSecure = useAxiosSecure();
   const {
-    data: districts = [],
-    isPending: isDistrictsPending,
+    data: upazilas = [],
+    isPending: isUpazilasPending,
     refetch,
     isError,
     error,
   } = useQuery({
-    queryKey: ["districts"],
+    queryKey: ["upazilas"],
     queryFn: async () => {
-      const response = await axiosSecure.get("/districts");
+      const response = await axiosSecure.get("/upazilas");
 
       return response.data;
     },
   });
 
-  return { districts, isDistrictsPending, refetch, isError, error };
+  return { upazilas, isUpazilasPending, refetch, isError, error };
 };
 
-export default useDistricts;
+export default useUpazilas;

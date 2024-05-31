@@ -158,14 +158,9 @@ const SignInPage = () => {
                           message: "You must fill password field",
                         },
                         minLength: {
-                          value: 8,
+                          value: 6,
                           message:
-                            "Your password should be atleast 8 characters long",
-                        },
-                        pattern: {
-                          value: /^(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
-                          message:
-                            "Your password should contain both uppercase and lowercase character",
+                            "Your password should be atleast 6 characters long",
                         },
                       })}
                     />

@@ -1,7 +1,6 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-
 import {
   Card,
   CardContent,
@@ -11,7 +10,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { EyeNoneIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "@/hooks/auth/useAuth";
@@ -29,26 +27,95 @@ import {
 } from "@/components/ui/select";
 import { SelectGroup } from "@radix-ui/react-select";
 import useDistricts from "@/hooks/getDataFromDB/useDistricts";
+import useUpazilas from "@/hooks/getDataFromDB/useUpazilas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
 
 const RegistrationPage = () => {
-  const [isPassVisible, SetIsPassVisible] = useState(false);
+  const [picture, setPicture] = useState(null);
   const { toast } = useToast();
   const navigate = useNavigate();
   const location = useLocation();
-  const { districts, isPending } = useDistricts();
+  const { districts, isDistrictsPending } = useDistricts();
+  const { upazilas, isUpazilasPending } = useUpazilas();
   const { createNewUser, updateUserProfile, logout, isLoading, setIsLoading } =
     useAuth();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const formSchema = z.object({
+    name: z.string().min(2, {
+      message: "Name is required.",
+    }),
+    email: z.string().min(2, {
+      message: "Name is required.",
+    }),
+    picture: z.string({
+      message: "Image is required.",
+    }),
+    bloodGroup: z.string({
+      message: "Blood Group is required.",
+    }),
+    district: z.string({
+      message: "District is required.",
+    }),
+    upazila: z.string({
+      message: "Upazila is required.",
+    }),
+    password: z.string().min(6, {
+      message: "Password should be atleast 6 characters long",
+    }),
+    confirmPassword: z.string().min(6, {
+      message: "Password should be atleast 6 characters long",
+    }),
+  });
 
-  const handleFormSubmit = (data) => {
-    const { name, email, photo, password } = data;
-    imageUpload(photo[0])
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      picture: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setPicture(file);
+  };
+
+  function onSubmit(values) {
+    const {
+      name,
+      email,
+      bloodGroup,
+      district,
+      upazila,
+      password,
+      confirmPassword,
+    } = values;
+
+    if (password !== confirmPassword) {
+      return toast({
+        title: "Password did not matched!",
+        description: "Type carefully and try again.",
+      });
+    }
+    if (!picture) {
+      return toast({
+        title: "Upload an image!",
+        description: "Then try again.",
+      });
+    }
+
+    imageUpload(picture)
       .then((response) => {
         const image_url = response.data.data.display_url;
         createNewUser(email, password)
@@ -61,8 +128,8 @@ const RegistrationPage = () => {
                 console.error(error.message);
               });
             logout();
-            navigate(location?.state ? location?.state : "/sign-in");
-            reset();
+            navigate("/sign-in");
+            form.reset();
             toast({
               title: "Congratulations!",
               description: "Profile successfully created.",
@@ -85,9 +152,9 @@ const RegistrationPage = () => {
           description: `${error.message}`,
         });
       });
-  };
+  }
 
-  if (isPending) return;
+  if (isDistrictsPending || isUpazilasPending) return;
 
   return (
     <section>
@@ -110,229 +177,219 @@ const RegistrationPage = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form
-                onSubmit={handleSubmit(handleFormSubmit)}
-                className="grid gap-7"
-              >
-                <div className="grid gap-2">
-                  <Label htmlFor="name">Name</Label>
-                  <Input
-                    id="name"
-                    type="text"
-                    placeholder="Enter your full name"
-                    {...register("name", {
-                      required: {
-                        value: true,
-                        message: "You must fill name field",
-                      },
-                    })}
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="grid gap-5"
+                >
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem className="grid">
+                        <Label htmlFor="name">Name</Label>
+                        <FormControl>
+                          <Input
+                            type="text"
+                            id="name"
+                            placeholder="Enter your full name"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                  {errors.name && (
-                    <p className="max-w-xs pt-1 text-xs text-red-500">
-                      {errors.name.message}
-                    </p>
-                  )}
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="m@example.com"
-                    {...register("email", {
-                      required: {
-                        value: true,
-                        message: "You must fill email field",
-                      },
-                    })}
+
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem className="grid">
+                        <Label htmlFor="email">Email</Label>
+                        <FormControl>
+                          <Input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email address"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                  {errors.email && (
-                    <p className="max-w-xs pt-1 text-xs text-red-500">
-                      {errors.email.message}
-                    </p>
-                  )}
-                </div>
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                  <div className="grid gap-2">
-                    <Label htmlFor="picture">Picture</Label>
-                    <Input
-                      id="picture"
-                      type="file"
-                      className="file:text-primary"
-                      {...register("photo", {
-                        required: {
-                          value: true,
-                          message: "You must upload a photo",
-                        },
-                      })}
-                    />
-                    {errors.photo && (
-                      <p className="max-w-xs pt-1 text-xs text-red-500">
-                        {errors.photo.message}
-                      </p>
-                    )}
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="Blood Group">Blood Group</Label>
-                    <Select>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select your blood group" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          <SelectLabel>Blood Group</SelectLabel>
-                          <SelectItem value="A Positive">
-                            A Positive (+)
-                          </SelectItem>
-                          <SelectItem value="A Negative">
-                            A Negative (-)
-                          </SelectItem>
-                          <SelectItem value="B Positive">
-                            B Positive (+)
-                          </SelectItem>
-                          <SelectItem value="B Negative">
-                            B Negative (-)
-                          </SelectItem>
-                          <SelectItem value="AB Positive">
-                            AB Positive (+)
-                          </SelectItem>
-                          <SelectItem value="AB Negative">
-                            AB Negative (-)
-                          </SelectItem>
-                          <SelectItem value="O Positive">
-                            O Positive (+)
-                          </SelectItem>
-                          <SelectItem value="O Negative">
-                            O Negative (-)
-                          </SelectItem>
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                    {errors.photo && (
-                      <p className="max-w-xs pt-1 text-xs text-red-500">
-                        {errors.photo.message}
-                      </p>
-                    )}
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                  <div className="grid gap-2">
-                    <Label htmlFor="Blood Group">District</Label>
-                    <Select>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select your district" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          <SelectLabel>District</SelectLabel>
-                          {districts.map((district) => (
-                            <SelectItem
-                              key={district._id}
-                              value={district.name}
-                            >
-                              {district.name}
-                            </SelectItem>
-                          ))}
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                    {errors.photo && (
-                      <p className="max-w-xs pt-1 text-xs text-red-500">
-                        {errors.photo.message}
-                      </p>
-                    )}
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="Blood Group">Blood Group</Label>
-                    <Select>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select your blood group" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          <SelectLabel>Blood Group</SelectLabel>
-                          <SelectItem value="A Positive">
-                            A Positive (+)
-                          </SelectItem>
-                          <SelectItem value="A Negative">
-                            A Negative (-)
-                          </SelectItem>
-                          <SelectItem value="B Positive">
-                            B Positive (+)
-                          </SelectItem>
-                          <SelectItem value="B Negative">
-                            B Negative (-)
-                          </SelectItem>
-                          <SelectItem value="AB Positive">
-                            AB Positive (+)
-                          </SelectItem>
-                          <SelectItem value="AB Negative">
-                            AB Negative (-)
-                          </SelectItem>
-                          <SelectItem value="O Positive">
-                            O Positive (+)
-                          </SelectItem>
-                          <SelectItem value="O Negative">
-                            O Negative (-)
-                          </SelectItem>
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                    {errors.photo && (
-                      <p className="max-w-xs pt-1 text-xs text-red-500">
-                        {errors.photo.message}
-                      </p>
-                    )}
-                  </div>
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="password">Password</Label>
-                  <div className="relative">
-                    <Input
-                      id="password"
-                      type={isPassVisible ? "text" : "password"}
-                      placeholder="Enter your password"
-                      {...register("password", {
-                        required: {
-                          value: true,
-                          message: "You must fill password field",
-                        },
-                        minLength: {
-                          value: 8,
-                          message:
-                            "Your password should be atleast 8 characters long",
-                        },
-                        pattern: {
-                          value: /^(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
-                          message:
-                            "Your password should contain both uppercase and lowercase character",
-                        },
-                      })}
-                    />
-                    <Button
-                      onClick={() => SetIsPassVisible(!isPassVisible)}
-                      type="button"
-                      size="sm"
-                      variant="ghost"
-                      className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                    >
-                      {isPassVisible ? (
-                        <EyeOpenIcon className="h-5 w-5" />
-                      ) : (
-                        <EyeNoneIcon className="h-5 w-5" />
+                  <div className="flex flex-col gap-5 md:flex-row">
+                    <div className="grid w-full gap-2 self-start md:w-1/2">
+                      <Label htmlFor="picture">Picture</Label>
+                      <Input
+                        id="picture"
+                        type="file"
+                        onChange={handleImageChange}
+                        className="file:text-primary"
+                      />
+                    </div>
+
+                    <FormField
+                      control={form.control}
+                      name="bloodGroup"
+                      className="grid gap-2 self-start"
+                      render={({ field }) => (
+                        <FormItem className="grid w-full md:w-1/2 ">
+                          <Label>Blood group</Label>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
+                            <SelectTrigger className="w-full">
+                              <SelectValue placeholder="Select your blood group" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectLabel>Blood groups</SelectLabel>
+                                <SelectItem value="A positive">
+                                  A positive
+                                </SelectItem>
+                                <SelectItem value="A negative">
+                                  A negative
+                                </SelectItem>
+                                <SelectItem value="B positive">
+                                  B positive
+                                </SelectItem>
+                                <SelectItem value="B negative">
+                                  B negative
+                                </SelectItem>
+                                <SelectItem value="AB positive">
+                                  AB positive
+                                </SelectItem>
+                                <SelectItem value="AB negative">
+                                  AB negative
+                                </SelectItem>
+                                <SelectItem value="O positive">
+                                  O positive
+                                </SelectItem>
+                                <SelectItem value="O negative">
+                                  O negative
+                                </SelectItem>
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
                       )}
-                    </Button>
+                    />
                   </div>
-                  {errors.password && (
-                    <p className="max-w-xs pt-1 text-xs text-red-500">
-                      {errors.password.message}
-                    </p>
-                  )}
-                </div>
-                <Button className="w-full" disabled={isLoading}>
-                  Create New Account
-                </Button>
-              </form>
+
+                  <div className="flex flex-col gap-5 md:flex-row">
+                    <FormField
+                      control={form.control}
+                      name="district"
+                      className="grid gap-2 "
+                      render={({ field }) => (
+                        <FormItem className="grid w-full self-start md:w-1/2">
+                          <Label htmlFor="district">District</Label>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
+                            <SelectTrigger className="w-full">
+                              <SelectValue placeholder="Select your district" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectLabel>Districts</SelectLabel>
+                                {districts.map((district) => (
+                                  <SelectItem
+                                    key={district._id}
+                                    value={district.name}
+                                  >
+                                    {district.name}
+                                  </SelectItem>
+                                ))}
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="upazila"
+                      className="grid gap-2"
+                      render={({ field }) => (
+                        <FormItem className="grid w-full self-start md:w-1/2">
+                          <Label htmlFor="upazila">Upazila</Label>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
+                            <SelectTrigger className="w-full">
+                              <SelectValue placeholder="Select your upazila" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectLabel>Upazilas</SelectLabel>
+                                {upazilas.map((upazila) => (
+                                  <SelectItem
+                                    key={upazila._id}
+                                    value={upazila.name}
+                                  >
+                                    {upazila.name}
+                                  </SelectItem>
+                                ))}
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem className="grid">
+                        <Label htmlFor="password">Password</Label>
+                        <FormControl>
+                          <Input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="confirmPassword"
+                    render={({ field }) => (
+                      <FormItem className="grid">
+                        <Label htmlFor="password">Confirm password</Label>
+                        <FormControl>
+                          <Input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Enter your password again"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <Button type="submit" disabled={isLoading}>
+                    Register Now
+                  </Button>
+                </form>
+              </Form>
             </CardContent>
             <CardFooter>
               <div className="w-full">
