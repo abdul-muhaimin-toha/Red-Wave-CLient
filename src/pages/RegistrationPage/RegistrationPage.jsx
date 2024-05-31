@@ -1,8 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { FaGoogle, FaGithub } from "react-icons/fa";
-import { CgSpinner } from "react-icons/cg";
+
 import {
   Card,
   CardContent,
@@ -20,21 +19,25 @@ import { imageUpload } from "@/utils/imageUpload";
 import { useToast } from "@/components/ui/use-toast";
 import Lottie from "lottie-react";
 import groovyWalkAnimation from "../../assets/lottieJson/loading-bar.json";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { SelectGroup } from "@radix-ui/react-select";
+import useDistricts from "@/hooks/getDataFromDB/useDistricts";
 
 const RegistrationPage = () => {
   const [isPassVisible, SetIsPassVisible] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
   const location = useLocation();
-  const {
-    createNewUser,
-    updateUserProfile,
-    logout,
-    googleLogin,
-    githubLogin,
-    isLoading,
-    setIsLoading,
-  } = useAuth();
+  const { districts, isPending } = useDistricts();
+  const { createNewUser, updateUserProfile, logout, isLoading, setIsLoading } =
+    useAuth();
 
   const {
     register,
@@ -84,47 +87,7 @@ const RegistrationPage = () => {
       });
   };
 
-  const handleGoogleLogin = () => {
-    googleLogin()
-      .then(() => {
-        setIsLoading(false);
-        navigate(location?.state ? location?.state : "/");
-        toast({
-          title: "Congratulations!",
-          description: "Successfully signed in with google.",
-        });
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        const errorMessage = error.message;
-        console.error(errorMessage);
-        toast({
-          title: "Sorry, try again!",
-          description: `${errorMessage}`,
-        });
-      });
-  };
-
-  const handleGithubLogin = () => {
-    githubLogin()
-      .then(() => {
-        setIsLoading(false);
-        navigate(location?.state ? location?.state : "/");
-        toast({
-          title: "Congratulations!",
-          description: "Successfully signed in with github.",
-        });
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        const errorMessage = error.message;
-        console.error(errorMessage);
-        toast({
-          title: "Sorry, try again!",
-          description: `${errorMessage}`,
-        });
-      });
-  };
+  if (isPending) return;
 
   return (
     <section>
@@ -189,24 +152,138 @@ const RegistrationPage = () => {
                     </p>
                   )}
                 </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="picture">Picture</Label>
-                  <Input
-                    id="picture"
-                    type="file"
-                    className="file:text-primary"
-                    {...register("photo", {
-                      required: {
-                        value: true,
-                        message: "You must upload a photo",
-                      },
-                    })}
-                  />
-                  {errors.photo && (
-                    <p className="max-w-xs pt-1 text-xs text-red-500">
-                      {errors.photo.message}
-                    </p>
-                  )}
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  <div className="grid gap-2">
+                    <Label htmlFor="picture">Picture</Label>
+                    <Input
+                      id="picture"
+                      type="file"
+                      className="file:text-primary"
+                      {...register("photo", {
+                        required: {
+                          value: true,
+                          message: "You must upload a photo",
+                        },
+                      })}
+                    />
+                    {errors.photo && (
+                      <p className="max-w-xs pt-1 text-xs text-red-500">
+                        {errors.photo.message}
+                      </p>
+                    )}
+                  </div>
+                  <div className="grid gap-2">
+                    <Label htmlFor="Blood Group">Blood Group</Label>
+                    <Select>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select your blood group" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Blood Group</SelectLabel>
+                          <SelectItem value="A Positive">
+                            A Positive (+)
+                          </SelectItem>
+                          <SelectItem value="A Negative">
+                            A Negative (-)
+                          </SelectItem>
+                          <SelectItem value="B Positive">
+                            B Positive (+)
+                          </SelectItem>
+                          <SelectItem value="B Negative">
+                            B Negative (-)
+                          </SelectItem>
+                          <SelectItem value="AB Positive">
+                            AB Positive (+)
+                          </SelectItem>
+                          <SelectItem value="AB Negative">
+                            AB Negative (-)
+                          </SelectItem>
+                          <SelectItem value="O Positive">
+                            O Positive (+)
+                          </SelectItem>
+                          <SelectItem value="O Negative">
+                            O Negative (-)
+                          </SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                    {errors.photo && (
+                      <p className="max-w-xs pt-1 text-xs text-red-500">
+                        {errors.photo.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  <div className="grid gap-2">
+                    <Label htmlFor="Blood Group">District</Label>
+                    <Select>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select your district" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>District</SelectLabel>
+                          {districts.map((district) => (
+                            <SelectItem
+                              key={district._id}
+                              value={district.name}
+                            >
+                              {district.name}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                    {errors.photo && (
+                      <p className="max-w-xs pt-1 text-xs text-red-500">
+                        {errors.photo.message}
+                      </p>
+                    )}
+                  </div>
+                  <div className="grid gap-2">
+                    <Label htmlFor="Blood Group">Blood Group</Label>
+                    <Select>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select your blood group" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Blood Group</SelectLabel>
+                          <SelectItem value="A Positive">
+                            A Positive (+)
+                          </SelectItem>
+                          <SelectItem value="A Negative">
+                            A Negative (-)
+                          </SelectItem>
+                          <SelectItem value="B Positive">
+                            B Positive (+)
+                          </SelectItem>
+                          <SelectItem value="B Negative">
+                            B Negative (-)
+                          </SelectItem>
+                          <SelectItem value="AB Positive">
+                            AB Positive (+)
+                          </SelectItem>
+                          <SelectItem value="AB Negative">
+                            AB Negative (-)
+                          </SelectItem>
+                          <SelectItem value="O Positive">
+                            O Positive (+)
+                          </SelectItem>
+                          <SelectItem value="O Negative">
+                            O Negative (-)
+                          </SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                    {errors.photo && (
+                      <p className="max-w-xs pt-1 text-xs text-red-500">
+                        {errors.photo.message}
+                      </p>
+                    )}
+                  </div>
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="password">Password</Label>
@@ -259,38 +336,8 @@ const RegistrationPage = () => {
             </CardContent>
             <CardFooter>
               <div className="w-full">
-                <div className="relative mb-4">
-                  <div className="absolute inset-0 flex items-center">
-                    <span className="w-full border-t" />
-                  </div>
-                  <div className="relative flex justify-center text-xs uppercase">
-                    <span className="rounded-full bg-background px-3 text-muted-foreground">
-                      Or continue with
-                    </span>
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
-                  <Button
-                    onClick={handleGoogleLogin}
-                    variant="outline"
-                    className="space-x-2"
-                    disabled={isLoading}
-                  >
-                    <FaGoogle className=" h-4 w-4" />
-                    <span>Google</span>
-                  </Button>
-                  <Button
-                    onClick={handleGithubLogin}
-                    variant="outline"
-                    className="space-x-2"
-                    disabled={isLoading}
-                  >
-                    <FaGithub className=" h-4 w-4" />
-                    <span>Github</span>
-                  </Button>
-                </div>
                 <div>
-                  <CardDescription className="mt-7 flex items-center justify-center gap-2 text-center">
+                  <CardDescription className="flex items-center justify-center gap-2 text-center">
                     Already have an account?
                     <Link
                       to="/sign-in"
