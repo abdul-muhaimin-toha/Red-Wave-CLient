@@ -37,12 +37,14 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+import useAxiosPublic from "@/hooks/axios/useAxiosPublic";
 
 const RegistrationPage = () => {
   const [picture, setPicture] = useState(null);
   const { toast } = useToast();
   const navigate = useNavigate();
   const location = useLocation();
+  const axiosPublic = useAxiosPublic();
   const { districts, isDistrictsPending } = useDistricts();
   const { upazilas, isUpazilasPending } = useUpazilas();
   const { createNewUser, updateUserProfile, logout, isLoading, setIsLoading } =
@@ -122,7 +124,23 @@ const RegistrationPage = () => {
           .then(() => {
             updateUserProfile(name, image_url)
               .then(() => {
-                setIsLoading(false);
+                axiosPublic
+                  .put("users", {
+                    name,
+                    email,
+                    bloodGroup,
+                    district,
+                    upazila,
+                    image_url,
+                    role: "active",
+                  })
+                  .then((res) => {
+                    if (res.data.upsertedCount > 1) {
+                      console.log(res.data);
+                      setIsLoading(false);
+                    }
+                  })
+                  .catch((err) => console.log(err));
               })
               .catch((error) => {
                 console.error(error.message);
