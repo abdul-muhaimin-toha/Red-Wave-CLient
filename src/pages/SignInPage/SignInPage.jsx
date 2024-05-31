@@ -1,7 +1,6 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { FaGoogle, FaGithub } from "react-icons/fa";
 import { EyeNoneIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 import {
   Card,
@@ -24,8 +23,7 @@ const SignInPage = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const location = useLocation();
-  const { emailPassLogin, googleLogin, githubLogin, isLoading, setIsLoading } =
-    useAuth();
+  const { emailPassLogin, isLoading, setIsLoading } = useAuth();
 
   const {
     register,
@@ -45,48 +43,6 @@ const SignInPage = () => {
         toast({
           title: "Congratulations!",
           description: "Successfully signed in.",
-        });
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        const errorMessage = error.message;
-        console.error(errorMessage);
-        toast({
-          title: "Sorry, try again!",
-          description: `${errorMessage}`,
-        });
-      });
-  };
-
-  const handleGoogleLogin = () => {
-    googleLogin()
-      .then(() => {
-        setIsLoading(false);
-        navigate(location?.state ? location?.state : "/");
-        toast({
-          title: "Congratulations!",
-          description: "Successfully signed in with google.",
-        });
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        const errorMessage = error.message;
-        console.error(errorMessage);
-        toast({
-          title: "Sorry, try again!",
-          description: `${errorMessage}`,
-        });
-      });
-  };
-
-  const handleGithubLogin = () => {
-    githubLogin()
-      .then(() => {
-        setIsLoading(false);
-        navigate(location?.state ? location?.state : "/");
-        toast({
-          title: "Congratulations!",
-          description: "Successfully signed in with github.",
         });
       })
       .catch((error) => {
@@ -131,7 +87,7 @@ const SignInPage = () => {
                   <Input
                     id="email"
                     type="email"
-                    placeholder="m@example.com"
+                    placeholder="Enter your email address"
                     {...register("email", {
                       required: {
                         value: true,
@@ -191,47 +147,15 @@ const SignInPage = () => {
             </CardContent>
             <CardFooter>
               <div className="w-full">
-                <div className="relative mb-4">
-                  <div className="absolute inset-0 flex items-center">
-                    <span className="w-full border-t" />
-                  </div>
-                  <div className="relative flex justify-center text-xs uppercase">
-                    <span className="rounded-full bg-background px-3 text-muted-foreground">
-                      Or continue with
-                    </span>
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
-                  <Button
-                    onClick={handleGoogleLogin}
-                    variant="outline"
-                    className="space-x-2"
-                    disabled={isLoading}
+                <CardDescription className=" flex items-center justify-center gap-2 text-center">
+                  Don&#39;t have an account?
+                  <Link
+                    to="/registration"
+                    className="font-semibold text-primary transition-all duration-200 hover:underline"
                   >
-                    <FaGoogle className=" h-4 w-4" />
-                    <span>Google</span>
-                  </Button>
-                  <Button
-                    onClick={handleGithubLogin}
-                    variant="outline"
-                    className="space-x-2"
-                    disabled={isLoading}
-                  >
-                    <FaGithub className=" h-4 w-4" />
-                    <span>Github</span>
-                  </Button>
-                </div>
-                <div>
-                  <CardDescription className="mt-7 flex items-center justify-center gap-2 text-center">
-                    Don&#39;t have an account?
-                    <Link
-                      to="/registration"
-                      className="font-semibold text-primary transition-all duration-200 hover:underline"
-                    >
-                      Register now!
-                    </Link>
-                  </CardDescription>
-                </div>
+                    Register now!
+                  </Link>
+                </CardDescription>
               </div>
             </CardFooter>
           </Card>
