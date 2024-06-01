@@ -5,6 +5,8 @@ import { createBrowserRouter } from "react-router-dom";
 import LoggedInRoute from "./LoggedInRoute";
 import HomePage from "@/pages/HomePage/HomePage";
 import ErrorPage from "@/pages/ErrorPage/ErrorPage";
+import DashBoardLayout from "@/layouts/DashBoardLayout";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +41,10 @@ export const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <h1>dashboard</h1>,
+    element: (
+      <PrivateRoute>
+        <DashBoardLayout />
+      </PrivateRoute>
+    ),
   },
 ]);
