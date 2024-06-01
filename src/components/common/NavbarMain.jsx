@@ -85,7 +85,9 @@ const NavbarMain = () => {
                   <SheetHeader className="w-full">
                     <SheetTitle className="my-8">
                       <Link to="/">
-                        <img src={Logo} alt="Logo" className="w-24" />
+                        <h3 className="font-bold uppercase text-primary">
+                          Red Wave
+                        </h3>
                       </Link>
                     </SheetTitle>
                     <div>

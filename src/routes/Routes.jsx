@@ -7,6 +7,8 @@ import HomePage from "@/pages/HomePage/HomePage";
 import ErrorPage from "@/pages/ErrorPage/ErrorPage";
 import DashBoardLayout from "@/layouts/DashBoardLayout";
 import PrivateRoute from "./PrivateRoute";
+import Loader from "@/components/common/Loader";
+import Profile from "@/pages/DashBoardPages/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -46,5 +48,11 @@ export const router = createBrowserRouter([
         <DashBoardLayout />
       </PrivateRoute>
     ),
+    children: [
+      {
+        path: "profile",
+        element: <Profile />,
+      },
+    ],
   },
 ]);
