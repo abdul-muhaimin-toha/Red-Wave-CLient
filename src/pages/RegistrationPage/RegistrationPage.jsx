@@ -132,7 +132,8 @@ const RegistrationPage = () => {
                     district,
                     upazila,
                     image_url,
-                    role: "active",
+                    role: "donor",
+                    status: "active",
                   })
                   .then((res) => {
                     if (res.data.upsertedCount > 1) {
@@ -145,13 +146,16 @@ const RegistrationPage = () => {
               .catch((error) => {
                 console.error(error.message);
               });
-            logout();
-            navigate("/sign-in");
-            form.reset();
-            toast({
-              title: "Congratulations!",
-              description: "Profile successfully created.",
-            });
+            logout()
+              .rhen(() => {
+                navigate("/sign-in");
+                form.reset();
+                toast({
+                  title: "Congratulations!",
+                  description: "Profile successfully created.",
+                });
+              })
+              .catch((err) => console.error(err.message));
           })
           .catch((error) => {
             setIsLoading(false);
