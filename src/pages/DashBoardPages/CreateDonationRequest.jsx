@@ -35,8 +35,8 @@ const CreateDonationRequest = () => {
     const requester_name = e.target.requester_name.value;
     const requester_email = e.target.requester_email.value;
     const recipient_name = e.target.recipient_name.value;
-    const Recipient_district = e.target.Recipient_district.value;
-    const Recipient_upazila = e.target.Recipient_upazila.value;
+    const recipient_district = e.target.Recipient_district.value;
+    const recipient_upazila = e.target.Recipient_upazila.value;
     const hospital_name = e.target.hospital_name.value;
     const full_address = e.target.full_address.value;
     const request_message = e.target.request_message.value;
@@ -45,8 +45,8 @@ const CreateDonationRequest = () => {
       requester_name,
       requester_email,
       recipient_name,
-      Recipient_district,
-      Recipient_upazila,
+      recipient_district,
+      recipient_upazila,
       donation_date: new Date(date),
       donation_time: time,
       hospital_name,

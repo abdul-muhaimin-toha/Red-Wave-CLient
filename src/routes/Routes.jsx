@@ -10,6 +10,7 @@ import PrivateRoute from "./PrivateRoute";
 import Loader from "@/components/common/Loader";
 import Profile from "@/pages/DashBoardPages/Profile";
 import CreateDonationRequest from "@/pages/DashBoardPages/CreateDonationRequest";
+import DashBoardHome from "@/pages/DashBoardPages/DashBoardHome";
 
 export const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      {
+        index: true,
+        element: <DashBoardHome />,
+      },
       {
         path: "profile",
         element: <Profile />,
