@@ -103,14 +103,14 @@ const Profile = () => {
   };
 
   if (isDistrictsPending || isUpazilasPending || isUserFromDBPending) return;
-  console.log(user);
+
   return (
     <>
       {updateModeOn ? (
         <section>
           <div className="mx-auto max-w-screen-2xl px-4">
             <div className="flex items-center justify-center">
-              <div className="my-16 w-full border-2 md:my-24 md:w-4/5 md:p-8 lg:w-3/5 xl:w-2/5 ">
+              <div className="my-16 w-full border-2 p-3 md:my-24 md:w-4/5 md:p-8 lg:w-3/5 xl:w-2/5 ">
                 <div className="space-y-4">
                   <h3 className="text-3xl font-semibold  uppercase">
                     Update your profile
@@ -151,7 +151,7 @@ const Profile = () => {
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                      <div className="col-span-1 grid gap-2 ">
+                      <div className="col-span-2 grid gap-2 md:col-span-1 ">
                         <Label htmlFor="bloodGroup">Blood Group</Label>
                         <select
                           disabled={!updateModeOn}
@@ -170,7 +170,7 @@ const Profile = () => {
                           <option value="O negative">O Negative</option>
                         </select>
                       </div>
-                      <div className="col-span-1 grid gap-2 ">
+                      <div className="col-span-2 grid gap-2 md:col-span-1">
                         <Label htmlFor="image">Add new image</Label>
                         <Input
                           disabled={!updateModeOn}
@@ -181,7 +181,7 @@ const Profile = () => {
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
-                      <div className="col-span-1 grid gap-2 ">
+                      <div className="col-span-2 grid gap-2 md:col-span-1">
                         <Label htmlFor="district">District</Label>
                         <select
                           disabled={!updateModeOn}
@@ -197,7 +197,7 @@ const Profile = () => {
                           ))}
                         </select>
                       </div>
-                      <div className="col-span-1 grid gap-2 ">
+                      <div className="col-span-2 grid gap-2 md:col-span-1 ">
                         <Label htmlFor="upazila">Upazila</Label>
                         <select
                           disabled={!updateModeOn}
@@ -229,7 +229,7 @@ const Profile = () => {
         <section>
           <div className="mx-auto max-w-screen-2xl px-4">
             <div className="flex items-center justify-center">
-              <div className="my-16 w-full border-2 md:my-24 md:w-4/5 md:p-8 lg:w-3/5 xl:w-2/5 ">
+              <div className="my-16 w-full border-2 p-3 md:my-24 md:w-4/5 md:p-8 lg:w-3/5 xl:w-2/5 ">
                 <div className="space-y-4">
                   <h3 className="text-3xl font-semibold  uppercase">
                     Update your profile

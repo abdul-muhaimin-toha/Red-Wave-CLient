@@ -9,6 +9,7 @@ import DashBoardLayout from "@/layouts/DashBoardLayout";
 import PrivateRoute from "./PrivateRoute";
 import Loader from "@/components/common/Loader";
 import Profile from "@/pages/DashBoardPages/Profile";
+import CreateDonationRequest from "@/pages/DashBoardPages/CreateDonationRequest";
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ export const router = createBrowserRouter([
       {
         path: "profile",
         element: <Profile />,
+      },
+      {
+        path: "create-donation-request",
+        element: <CreateDonationRequest />,
       },
     ],
   },
