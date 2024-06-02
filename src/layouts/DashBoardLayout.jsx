@@ -5,7 +5,7 @@ const DashBoardLayout = () => {
   return (
     <>
       <DashBoardSideBar />
-      <div className=" pt-20 md:ml-60">
+      <div className=" pt-32  md:ml-60 md:pt-20">
         <Outlet />
       </div>
     </>
