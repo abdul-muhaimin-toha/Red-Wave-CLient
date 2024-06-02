@@ -11,6 +11,7 @@ import Loader from "@/components/common/Loader";
 import Profile from "@/pages/DashBoardPages/Profile";
 import CreateDonationRequest from "@/pages/DashBoardPages/CreateDonationRequest";
 import DashBoardHome from "@/pages/DashBoardPages/DashBoardHome";
+import AllUsersPage from "@/pages/DashBoardPages/AllUsersPage";
 
 export const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ export const router = createBrowserRouter([
       {
         path: "create-donation-request",
         element: <CreateDonationRequest />,
+      },
+      {
+        path: "all-users",
+        element: <AllUsersPage />,
       },
     ],
   },

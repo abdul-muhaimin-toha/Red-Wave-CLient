@@ -75,7 +75,7 @@ const CreateDonationRequest = () => {
     <section>
       <div className="mx-auto max-w-screen-2xl px-4">
         <div className="flex items-center justify-center">
-          <div className="my-16 w-full border-2 p-3 md:my-24 md:w-4/5 md:p-8 lg:w-3/5 xl:w-2/5 ">
+          <div className="w-full border-2 p-3 md:w-4/5 md:p-8 lg:w-3/5 xl:w-2/5 ">
             <div className="space-y-4">
               <h3 className="text-3xl font-semibold  uppercase">
                 Create a new donation request

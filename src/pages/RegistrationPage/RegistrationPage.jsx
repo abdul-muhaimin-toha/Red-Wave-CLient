@@ -127,7 +127,7 @@ const RegistrationPage = () => {
                 axiosPublic
                   .put("users", {
                     name,
-                    email,
+                    email: email.toLowerCase(),
                     bloodGroup,
                     district,
                     upazila,
@@ -147,7 +147,7 @@ const RegistrationPage = () => {
                 console.error(error.message);
               });
             logout()
-              .rhen(() => {
+              .then(() => {
                 navigate("/sign-in");
                 form.reset();
                 toast({

@@ -3,13 +3,11 @@ import { Link } from "react-router-dom";
 import { RxAvatar } from "react-icons/rx";
 
 const DashBoardSideBar = () => {
-  const { user } = useAuth();
-  console.log(user);
   return (
-    <div className=" hidden h-screen w-64 flex-col space-y-6 border-r-2 bg-background p-3 md:flex">
+    <div className="fixed z-50 hidden h-screen w-60 -translate-x-full flex-col space-y-6 border-r-2 bg-background p-3 md:flex md:translate-x-0">
       <div className="divide-y divide-gray-700">
         <ul className="space-y-1 pb-4 pt-2 text-sm">
-          <li className="bg-gray-800 text-gray-50">
+          <li className="">
             <a
               rel="noopener noreferrer"
               href="#"

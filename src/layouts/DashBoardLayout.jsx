@@ -1,13 +1,13 @@
-import NavbarMain from "@/components/common/NavbarMain";
+import DashBoardSideBar from "@/components/dashBoard/DashBoardSideBar";
 import { Outlet } from "react-router-dom";
 
 const DashBoardLayout = () => {
   return (
     <>
-      <NavbarMain />
-      <main className="min-h-[calc(100vh-250px)] pt-20">
+      <DashBoardSideBar />
+      <div className=" pt-20 md:ml-60">
         <Outlet />
-      </main>
+      </div>
     </>
   );
 };
