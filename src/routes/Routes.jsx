@@ -16,6 +16,7 @@ import ContentManagement from "@/pages/DashBoardPages/ContentManagement/ContentM
 import AddBlog from "@/pages/DashBoardPages/ContentManagement/AddBlog";
 import MyDonationRequestPage from "@/pages/DashBoardPages/MyDonationRequestPage";
 import UpdateDonationPage from "@/pages/DashBoardPages/UpdateDonationPage";
+import AllDonationRequestPage from "@/pages/DashBoardPages/AllDonationRequestPage";
 
 export const router = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ export const router = createBrowserRouter([
       {
         path: "my-donation-requests",
         element: <MyDonationRequestPage />,
+      },
+      {
+        path: "all-donation-requests",
+        element: <AllDonationRequestPage />,
       },
       {
         path: "all-users",
