@@ -116,7 +116,7 @@ const AllUsersTableRow = ({ user, refetch }) => {
               <BsThreeDots className="h-5 w-5" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" forceMount>
+          <DropdownMenuContent align="end" className="w-40" forceMount>
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
             {status === "active" && (

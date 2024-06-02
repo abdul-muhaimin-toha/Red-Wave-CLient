@@ -7,11 +7,13 @@ import HomePage from "@/pages/HomePage/HomePage";
 import ErrorPage from "@/pages/ErrorPage/ErrorPage";
 import DashBoardLayout from "@/layouts/DashBoardLayout";
 import PrivateRoute from "./PrivateRoute";
-import Loader from "@/components/common/Loader";
+
 import Profile from "@/pages/DashBoardPages/Profile";
 import CreateDonationRequest from "@/pages/DashBoardPages/CreateDonationRequest";
 import DashBoardHome from "@/pages/DashBoardPages/DashBoardHome";
 import AllUsersPage from "@/pages/DashBoardPages/AllUsersPage";
+import ContentManagement from "@/pages/DashBoardPages/ContentManagement/ContentManagement";
+import AddBlog from "@/pages/DashBoardPages/ContentManagement/AddBlog";
 
 export const router = createBrowserRouter([
   {
@@ -67,6 +69,14 @@ export const router = createBrowserRouter([
       {
         path: "all-users",
         element: <AllUsersPage />,
+      },
+      {
+        path: "content-management",
+        element: <ContentManagement />,
+      },
+      {
+        path: "content-management/add-blog",
+        element: <AddBlog />,
       },
     ],
   },
