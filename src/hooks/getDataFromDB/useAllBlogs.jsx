@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../axios/useAxiosSecure";
 
-const useAllBlogs = () => {
+const useAllBlogs = (filterValue) => {
   const axiosSecure = useAxiosSecure();
 
   const {
@@ -11,9 +11,9 @@ const useAllBlogs = () => {
     isError,
     error,
   } = useQuery({
-    queryKey: ["all-blogs"],
+    queryKey: ["all-blogs", filterValue],
     queryFn: async () => {
-      const response = await axiosSecure.get(`/blogs`);
+      const response = await axiosSecure.get(`/blogs?status=${filterValue}`);
 
       return response.data;
     },

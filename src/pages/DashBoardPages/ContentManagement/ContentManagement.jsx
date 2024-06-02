@@ -2,6 +2,12 @@ import AllUsersTableRow from "@/components/dashBoard/AllUsersTable/AllUsersTable
 import ContentManagementTableRow from "@/components/dashBoard/ContentManagementTableRow";
 import { Button } from "@/components/ui/button";
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
   Table,
   TableBody,
   TableHead,
@@ -9,10 +15,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import useAllBlogs from "@/hooks/getDataFromDB/useAllBlogs";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const ContentManagement = () => {
-  const { allBlogs, refetch } = useAllBlogs();
+  const [filterValue, setFilterValue] = useState("");
+
+  const { allBlogs, refetch } = useAllBlogs(filterValue);
   return (
     <section>
       <div className="mx-auto max-w-screen-2xl  px-4">
@@ -27,6 +36,33 @@ const ContentManagement = () => {
               <h3 className=" pb-4 text-center text-2xl font-semibold uppercase md:text-3xl">
                 A list of All blogs of Blood Wave!
               </h3>
+              <div className=" mb-12 mt-5">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button>Filter Blogs</Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent
+                    align="center"
+                    className="space-x-2"
+                    forceMount
+                  >
+                    <DropdownMenuSeparator />
+
+                    <Button
+                      size="sm"
+                      onClick={() => setFilterValue("published")}
+                    >
+                      Published
+                    </Button>
+                    <Button size="sm" onClick={() => setFilterValue("draft")}>
+                      Draft
+                    </Button>
+                    <Button size="sm" onClick={() => setFilterValue("")}>
+                      Clear
+                    </Button>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
               <div className=" mb-12 mt-5 w-full">
                 <Table>
                   <TableHeader>
