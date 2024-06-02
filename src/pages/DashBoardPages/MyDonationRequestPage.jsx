@@ -7,21 +7,23 @@ import {
 } from "@/components/ui/table";
 import useAuth from "@/hooks/auth/useAuth";
 import useDonationRequestforUser from "@/hooks/getDataFromDB/useDonationRequestforUser";
-import DonationRequestTableRow from "./DonationRequestTableRow";
+import DonationRequestTableRow from "@/components/dashBoard/DonationRequestTable/DonationRequestTableRow";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 
-const DonationRequestTable = () => {
+const MyDonationRequestPage = () => {
+  const [filterValue, setFilterValue] = useState("");
   const { user } = useAuth();
   const { donationRequestForUser, refetch } = useDonationRequestforUser(
     user.email,
-    "",
-    3,
+    filterValue,
   );
-
-  console.log(donationRequestForUser);
-
-  if (!donationRequestForUser.length > 0) return;
 
   return (
     <div className="mx-auto max-w-screen-2xl  px-4">
@@ -29,8 +31,37 @@ const DonationRequestTable = () => {
         <div className="w-full rounded-md border-2 p-5  md:p-8 lg:w-4/5 xl:w-4/5 ">
           <div className="mx-auto max-w-2xl text-center md:p-6">
             <h3 className=" pb-4 text-center text-2xl font-semibold uppercase md:text-3xl">
-              A list of your recent donation Requests
+              Your all donation Requests
             </h3>
+          </div>
+          <div className=" mb-14 mt-5 flex items-center justify-center ">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button>Filter Table</Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                align="center"
+                className="space-x-1"
+                forceMount
+              >
+                <DropdownMenuSeparator />
+                <Button size="sm" onClick={() => setFilterValue("pending")}>
+                  Pending
+                </Button>
+                <Button size="sm" onClick={() => setFilterValue("inprogress")}>
+                  Inprogress
+                </Button>
+                <Button size="sm" onClick={() => setFilterValue("done")}>
+                  Done
+                </Button>
+                <Button size="sm" onClick={() => setFilterValue("canceled")}>
+                  Canceled
+                </Button>
+                <Button size="sm" onClick={() => setFilterValue("")}>
+                  Clear
+                </Button>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
           <Table>
             <TableHeader>
@@ -57,15 +88,10 @@ const DonationRequestTable = () => {
               ))}
             </TableBody>
           </Table>
-          <div className="mt-8 text-center">
-            <Link to="/dashboard/my-donation-requests">
-              <Button>View my all donation Request</Button>
-            </Link>
-          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default DonationRequestTable;
+export default MyDonationRequestPage;

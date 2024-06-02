@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../axios/useAxiosSecure";
 
-const useDonationRequestforUser = (userEmail) => {
+const useDonationRequestforUser = (userEmail, filter, limit) => {
   const axiosSecure = useAxiosSecure();
   const {
     data: donationRequestForUser = [],
@@ -10,9 +10,11 @@ const useDonationRequestforUser = (userEmail) => {
     isError,
     error,
   } = useQuery({
-    queryKey: ["donation-request-for-user", userEmail],
+    queryKey: ["donation-request-for-user", userEmail, limit, filter],
     queryFn: async () => {
-      const response = await axiosSecure.get(`/donation-requests/${userEmail}`);
+      const response = await axiosSecure.get(
+        `/donation-requests/${userEmail}?limit=${limit}&status=${filter}`,
+      );
 
       return response.data;
     },

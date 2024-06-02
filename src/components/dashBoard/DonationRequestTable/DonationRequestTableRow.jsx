@@ -1,10 +1,16 @@
 import { Button } from "@/components/ui/button";
-import { TableHead, TableRow } from "@/components/ui/table";
+
+import { TableCell, TableRow } from "@/components/ui/table";
+import useAxiosSecure from "@/hooks/axios/useAxiosSecure";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { FaArrowAltCircleRight, FaEdit } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
-const DonationRequestTableRow = ({ donation }) => {
+const DonationRequestTableRow = ({ donation, refetch }) => {
+  const axiosSecure = useAxiosSecure();
   const {
+    _id,
     recipient_name,
     recipient_upazila,
     recipient_district,
@@ -14,30 +20,68 @@ const DonationRequestTableRow = ({ donation }) => {
     requester_name,
     requester_email,
   } = donation;
+
+  const handleDelete = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .delete(`/donation-requests/${_id}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              console.log(res.data);
+              refetch();
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+            }
+          })
+          .catch((err) => {
+            Swal.fire({
+              title: "Failed!",
+              text: "File deletation failed.",
+              icon: "Error",
+            });
+          });
+      }
+    });
+  };
+
   return (
     <TableRow>
-      <TableHead>{recipient_name}</TableHead>
-      <TableHead>{`${recipient_upazila}, ${recipient_district}`}</TableHead>
-      <TableHead>{new Date(donation_date).toLocaleDateString()}</TableHead>
-      <TableHead>{donation_time}</TableHead>
-      <TableHead>{donation_status}</TableHead>
-      <TableHead>{requester_name}</TableHead>
-      <TableHead>{requester_email}</TableHead>
-      <TableHead>
-        <Button size="icon" className="my-1">
-          <FaEdit />
-        </Button>
-      </TableHead>
-      <TableHead>
-        <Button size="icon" className="my-1">
+      <TableCell>{recipient_name}</TableCell>
+      <TableCell>{`${recipient_upazila}, ${recipient_district}`}</TableCell>
+      <TableCell>{new Date(donation_date).toLocaleDateString()}</TableCell>
+      <TableCell>{donation_time}</TableCell>
+      <TableCell>{donation_status}</TableCell>
+      <TableCell>{requester_name}</TableCell>
+      <TableCell>{requester_email}</TableCell>
+      <TableCell>
+        <Link to={`/dashboard/update-donation-request/${_id}`}>
+          <Button size="icon" className="my-1">
+            <FaEdit />
+          </Button>
+        </Link>
+      </TableCell>
+      <TableCell>
+        <Button onClick={handleDelete} size="icon" className="my-1">
           <TrashIcon />
         </Button>
-      </TableHead>
-      <TableHead className="text-right">
+      </TableCell>
+      <TableCell className="text-right">
         <Button size="icon" className="my-1">
           <FaArrowAltCircleRight />
         </Button>
-      </TableHead>
+      </TableCell>
     </TableRow>
   );
 };

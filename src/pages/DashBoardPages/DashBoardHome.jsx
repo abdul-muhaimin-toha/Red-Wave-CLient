@@ -1,8 +1,11 @@
 import useAuth from "@/hooks/auth/useAuth";
 import AdminDashBoard from "./DashBoardHomePages/AdminDashBoard";
+import DonationRequestTable from "@/components/dashBoard/DonationRequestTable/DonationRequestTable";
+import useUser from "@/hooks/getDataFromDB/useUser";
 
 const DashBoardHome = () => {
   const { user } = useAuth();
+  const { userFromDB } = useUser(user.email);
 
   return (
     <>
@@ -25,7 +28,8 @@ const DashBoardHome = () => {
           </div>
         </div>
       </section>
-      <AdminDashBoard />
+      {userFromDB.role === "admin" && <AdminDashBoard />}
+      {userFromDB.role === "donor" && <DonationRequestTable />}
     </>
   );
 };

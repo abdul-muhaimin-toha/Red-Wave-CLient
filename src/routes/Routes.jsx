@@ -14,6 +14,8 @@ import DashBoardHome from "@/pages/DashBoardPages/DashBoardHome";
 import AllUsersPage from "@/pages/DashBoardPages/AllUsersPage";
 import ContentManagement from "@/pages/DashBoardPages/ContentManagement/ContentManagement";
 import AddBlog from "@/pages/DashBoardPages/ContentManagement/AddBlog";
+import MyDonationRequestPage from "@/pages/DashBoardPages/MyDonationRequestPage";
+import UpdateDonationPage from "@/pages/DashBoardPages/UpdateDonationPage";
 
 export const router = createBrowserRouter([
   {
@@ -65,6 +67,14 @@ export const router = createBrowserRouter([
       {
         path: "create-donation-request",
         element: <CreateDonationRequest />,
+      },
+      {
+        path: "update-donation-request/:id",
+        element: <UpdateDonationPage />,
+      },
+      {
+        path: "my-donation-requests",
+        element: <MyDonationRequestPage />,
       },
       {
         path: "all-users",
