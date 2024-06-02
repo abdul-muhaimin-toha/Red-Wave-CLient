@@ -6,12 +6,14 @@ import useAxiosSecure from "@/hooks/axios/useAxiosSecure";
 import { imageUpload } from "@/utils/imageUpload";
 import JoditEditor from "jodit-react";
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddBlog = () => {
   const editor = useRef(null);
   const [content, setContent] = useState("");
   const [picture, setPicture] = useState(null);
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -32,6 +34,7 @@ const AddBlog = () => {
               console.log(res.data);
               e.target.reset();
               setContent("");
+              navigate("/dashboard/content-management");
               toast({
                 title: "Congratulations!",
                 description: "Blog uploaded successfully.",
