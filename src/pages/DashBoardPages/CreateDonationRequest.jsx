@@ -21,6 +21,8 @@ import "react-time-picker/dist/TimePicker.css";
 import "react-clock/dist/Clock.css";
 import useAxiosSecure from "@/hooks/axios/useAxiosSecure";
 import { toast } from "@/components/ui/use-toast";
+import { useNavigate } from "react-router-dom";
+import useUser from "@/hooks/getDataFromDB/useUser";
 
 const CreateDonationRequest = () => {
   const [date, setDate] = useState();
@@ -28,7 +30,9 @@ const CreateDonationRequest = () => {
   const { districts, isDistrictsPending } = useDistricts();
   const { upazilas, isUpazilasPending } = useUpazilas();
   const { user } = useAuth();
+  const { userFromDB } = useUser(user.email);
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -54,12 +58,22 @@ const CreateDonationRequest = () => {
       request_message,
       donation_status: "pending",
     };
+
+    if (userFromDB.status === "blocked") {
+      navigate("/dashboard/my-donation-requests");
+      return toast({
+        title: "Sorry your id is bloced!",
+        description: "Blocked user can't post any new request",
+      });
+    }
+
     axiosSecure
       .post("/donation-requests", requestData)
       .then((res) => {
         if (res.data.insertedId) {
           console.log(res.data);
           e.target.reset();
+          navigate("/dashboard/my-donation-requests");
           toast({
             title: "Congratulations!",
             description: "Request posted successfully.",

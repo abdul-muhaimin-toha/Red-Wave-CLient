@@ -2,10 +2,12 @@ import useAuth from "@/hooks/auth/useAuth";
 import AdminDashBoard from "./DashBoardHomePages/AdminDashBoard";
 import DonationRequestTable from "@/components/dashBoard/DonationRequestTable/DonationRequestTable";
 import useUser from "@/hooks/getDataFromDB/useUser";
+import useRole from "@/hooks/getDataFromDB/useRole";
 
 const DashBoardHome = () => {
   const { user } = useAuth();
   const { userFromDB } = useUser(user.email);
+  const { userRole, isUserRoleLoading } = useRole();
 
   return (
     <>
@@ -18,18 +20,17 @@ const DashBoardHome = () => {
                   Welcome to Red Wave, {user.displayName}!
                 </h3>
                 <p className="text-sm">
-                  Thank you for logging in as a donor. Your generosity and
+                  Thank you for logging in as a {userRole}. Your generosity and
                   support make a huge difference in the lives of those we serve.
-                  We are thrilled to have you as a part of our community, and we
-                  look forward to working together to create positive change.
+                  We are thrilled to have you as a part of our community.
                 </p>
               </div>
             </div>
           </div>
         </div>
       </section>
-      {userFromDB.role === "admin" && <AdminDashBoard />}
-      {userFromDB.role === "donor" && <DonationRequestTable />}
+      {(userRole === "admin" || userRole === "volunteer") && <AdminDashBoard />}
+      {userRole === "donor" && <DonationRequestTable />}
     </>
   );
 };

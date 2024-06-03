@@ -11,10 +11,14 @@ import {
 import { BsThreeDots } from "react-icons/bs";
 import useAxiosSecure from "@/hooks/axios/useAxiosSecure";
 import { toast } from "../ui/use-toast";
+import useUser from "@/hooks/getDataFromDB/useUser";
+import useAuth from "@/hooks/auth/useAuth";
+import useRole from "@/hooks/getDataFromDB/useRole";
 
 const ContentManagementTableRow = ({ blog, refetch }) => {
   const axiosSecure = useAxiosSecure();
   const { _id, image_url, title, status } = blog;
+  const { userRole, isUserRoleLoading } = useRole();
 
   const handleBlogStatus = (newStatus) => {
     axiosSecure
@@ -71,42 +75,44 @@ const ContentManagementTableRow = ({ blog, refetch }) => {
       </TableHead>
       <TableHead>{title}</TableHead>
       <TableHead className="capitalize">{status}</TableHead>
-      <TableHead className="text-right">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button size="icon">
-              <BsThreeDots className="h-5 w-5" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            align="end"
-            className="w-40 space-y-1"
-            forceMount
-          >
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            {status === "draft" && (
-              <Button
-                onClick={() => handleBlogStatus("published")}
-                className="w-full"
-              >
-                Publish
+      {userRole === "admin" && (
+        <TableHead className="text-right">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button size="icon">
+                <BsThreeDots className="h-5 w-5" />
               </Button>
-            )}
-            {status === "published" && (
-              <Button
-                onClick={() => handleBlogStatus("draft")}
-                className="w-full"
-              >
-                Unpublished
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="end"
+              className="w-40 space-y-1"
+              forceMount
+            >
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              {status === "draft" && (
+                <Button
+                  onClick={() => handleBlogStatus("published")}
+                  className="w-full"
+                >
+                  Publish
+                </Button>
+              )}
+              {status === "published" && (
+                <Button
+                  onClick={() => handleBlogStatus("draft")}
+                  className="w-full"
+                >
+                  Unpublished
+                </Button>
+              )}
+              <Button onClick={handleDeleteBlog} className="w-full">
+                Delete
               </Button>
-            )}
-            <Button onClick={handleDeleteBlog} className="w-full">
-              Delete
-            </Button>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </TableHead>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </TableHead>
+      )}
     </TableRow>
   );
 };

@@ -14,13 +14,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import useAuth from "@/hooks/auth/useAuth";
 import useAllBlogs from "@/hooks/getDataFromDB/useAllBlogs";
+import useRole from "@/hooks/getDataFromDB/useRole";
+import useUser from "@/hooks/getDataFromDB/useUser";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const ContentManagement = () => {
   const [filterValue, setFilterValue] = useState("");
-
+  const { userRole, isUserRoleLoading } = useRole();
   const { allBlogs, refetch } = useAllBlogs(filterValue);
   return (
     <section>
@@ -70,7 +73,9 @@ const ContentManagement = () => {
                       <TableHead>Thumbnail</TableHead>
                       <TableHead>Title</TableHead>
                       <TableHead>Status</TableHead>
-                      <TableHead className="text-right">Action</TableHead>
+                      {userRole === "admin" && (
+                        <TableHead className="text-right">Action</TableHead>
+                      )}
                     </TableRow>
                   </TableHeader>
                   <TableBody>

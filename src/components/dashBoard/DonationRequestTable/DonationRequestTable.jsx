@@ -10,9 +10,12 @@ import useDonationRequestforUser from "@/hooks/getDataFromDB/useDonationRequestf
 import DonationRequestTableRow from "./DonationRequestTableRow";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import useUser from "@/hooks/getDataFromDB/useUser";
+import DonationRequestTableRowForDonor from "./DonationRequestTableRowForDonor";
 
 const DonationRequestTable = () => {
   const { user } = useAuth();
+  const { userFromDB } = useUser(user.email);
   const { donationRequestForUser, refetch } = useDonationRequestforUser(
     user.email,
     "",
@@ -40,8 +43,7 @@ const DonationRequestTable = () => {
                 <TableHead>Donation Date</TableHead>
                 <TableHead>Donation Time</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead>Donor Name</TableHead>
-                <TableHead>Donor Email</TableHead>
+
                 <TableHead>Edit</TableHead>
                 <TableHead>Delete</TableHead>
                 <TableHead className="text-right">View</TableHead>
@@ -49,7 +51,7 @@ const DonationRequestTable = () => {
             </TableHeader>
             <TableBody>
               {donationRequestForUser.map((donation) => (
-                <DonationRequestTableRow
+                <DonationRequestTableRowForDonor
                   refetch={refetch}
                   key={donation._id}
                   donation={donation}

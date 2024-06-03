@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import DonationRequestTableRowForDonor from "@/components/dashBoard/DonationRequestTable/DonationRequestTableRowForDonor";
 
 const MyDonationRequestPage = () => {
   const [filterValue, setFilterValue] = useState("");
@@ -71,8 +72,6 @@ const MyDonationRequestPage = () => {
                 <TableHead>Donation Date</TableHead>
                 <TableHead>Donation Time</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead>Donor Name</TableHead>
-                <TableHead>Donor Email</TableHead>
                 <TableHead>Edit</TableHead>
                 <TableHead>Delete</TableHead>
                 <TableHead className="text-right">View</TableHead>
@@ -80,7 +79,7 @@ const MyDonationRequestPage = () => {
             </TableHeader>
             <TableBody>
               {donationRequestForUser.map((donation) => (
-                <DonationRequestTableRow
+                <DonationRequestTableRowForDonor
                   refetch={refetch}
                   key={donation._id}
                   donation={donation}

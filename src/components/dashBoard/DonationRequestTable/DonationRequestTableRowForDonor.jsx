@@ -3,16 +3,16 @@ import { Button } from "@/components/ui/button";
 import { TableCell, TableRow } from "@/components/ui/table";
 import useAuth from "@/hooks/auth/useAuth";
 import useAxiosSecure from "@/hooks/axios/useAxiosSecure";
-import useRole from "@/hooks/getDataFromDB/useRole";
 import useUser from "@/hooks/getDataFromDB/useUser";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { FaArrowAltCircleRight, FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const DonationRequestTableRow = ({ donation, refetch }) => {
+const DonationRequestTableRowForDonor = ({ donation, refetch }) => {
   const axiosSecure = useAxiosSecure();
-  const { userRole, isUserRoleLoading } = useRole();
+  const { user } = useAuth();
+  const { userFromDB } = useUser(user.email);
   const {
     _id,
     recipient_name,
@@ -75,21 +75,17 @@ const DonationRequestTableRow = ({ donation, refetch }) => {
         </Link>
       </TableCell>
       <TableCell>
-        {userRole === "admin" && (
-          <Button onClick={handleDelete} size="icon" className="my-1">
-            <TrashIcon />
-          </Button>
-        )}
+        <Button onClick={handleDelete} size="icon" className="my-1">
+          <TrashIcon />
+        </Button>
       </TableCell>
       <TableCell className="text-right">
-        {userRole === "admin" && (
-          <Button size="icon" className="my-1">
-            <FaArrowAltCircleRight />
-          </Button>
-        )}
+        <Button size="icon" className="my-1">
+          <FaArrowAltCircleRight />
+        </Button>
       </TableCell>
     </TableRow>
   );
 };
 
-export default DonationRequestTableRow;
+export default DonationRequestTableRowForDonor;

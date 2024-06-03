@@ -17,10 +17,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import useAllDonationRequest from "@/hooks/getDataFromDB/useAllDonationRequest";
+import useRole from "@/hooks/getDataFromDB/useRole";
 
 const AllDonationRequestPage = () => {
   const [filterValue, setFilterValue] = useState("");
-  const { user } = useAuth();
+  const { userRole, isUserRoleLoading } = useRole();
   const { allDonationRequest, refetch } = useAllDonationRequest(filterValue);
 
   return (
@@ -69,10 +70,9 @@ const AllDonationRequestPage = () => {
                 <TableHead>Donation Date</TableHead>
                 <TableHead>Donation Time</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead>Donor Name</TableHead>
-                <TableHead>Donor Email</TableHead>
-                <TableHead>Edit</TableHead>
-                <TableHead>Delete</TableHead>
+                {userRole === "admin" && <TableHead>Edit</TableHead>}
+                {userRole === "admin" && <TableHead>Delete</TableHead>}
+
                 <TableHead className="text-right">View</TableHead>
               </TableRow>
             </TableHeader>
