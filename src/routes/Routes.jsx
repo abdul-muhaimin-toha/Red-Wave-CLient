@@ -17,6 +17,7 @@ import AddBlog from "@/pages/DashBoardPages/ContentManagement/AddBlog";
 import MyDonationRequestPage from "@/pages/DashBoardPages/MyDonationRequestPage";
 import UpdateDonationPage from "@/pages/DashBoardPages/UpdateDonationPage";
 import AllDonationRequestPage from "@/pages/DashBoardPages/AllDonationRequestPage";
+import SearchPage from "@/pages/SearchPage/SearchPage";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path: "search",
+        element: <SearchPage />,
       },
       {
         path: "sign-in",

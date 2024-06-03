@@ -60,7 +60,7 @@ const Hero = () => {
                 Join as a donor
               </Button>
             </Link>
-            <Link to="/add-volunteer-post">
+            <Link to="/search">
               <Button size="lg" className="uppercase">
                 Search donors
               </Button>

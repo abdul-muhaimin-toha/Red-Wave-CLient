@@ -96,14 +96,16 @@ const NavbarMain = () => {
                           <Link to="/">Home</Link>
                         </div>
                         <div className=" border-b-2 px-2 py-5 transition-all duration-200 hover:text-primary/70">
-                          <Link>Brand</Link>
+                          <Link>Donation Requests</Link>
                         </div>
                         <div className=" border-b-2 px-2 py-5 transition-all duration-200 hover:text-primary/70">
-                          <Link>Contact Us</Link>
+                          <Link>Blog</Link>
                         </div>
-                        <div className=" border-b-2 px-2 py-5 transition-all duration-200 hover:text-primary/70">
-                          <Link>Resources</Link>
-                        </div>
+                        {user && (
+                          <div className=" border-b-2 px-2 py-5 transition-all duration-200 hover:text-primary/70">
+                            <Link>Fundings</Link>
+                          </div>
+                        )}
                         {!user && (
                           <div className=" border-b-2 px-2 py-5 transition-all duration-200 hover:text-primary/70">
                             <Link to="/registration">Registration</Link>
@@ -123,14 +125,16 @@ const NavbarMain = () => {
                 <Link to="/">Home</Link>
               </div>
               <div className="transition-all duration-200 hover:text-primary/70">
-                <Link>Brand</Link>
+                <Link>Donation Requests</Link>
               </div>
               <div className="transition-all duration-200 hover:text-primary/70">
-                <Link>Contact Us</Link>
+                <Link>Blog</Link>
               </div>
-              <div className="transition-all duration-200 hover:text-primary/70">
-                <Link>Resources</Link>
-              </div>
+              {user && (
+                <div className="transition-all duration-200 hover:text-primary/70">
+                  <Link>Fundings</Link>
+                </div>
+              )}
             </div>
           </div>
           <div className="flex items-center justify-center gap-4">
