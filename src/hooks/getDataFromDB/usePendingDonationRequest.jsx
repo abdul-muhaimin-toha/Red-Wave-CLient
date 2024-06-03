@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../axios/useAxiosSecure";
+import useAxiosPublic from "../axios/useAxiosPublic";
 
 const usePendingDonationRequest = () => {
-  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const {
     data: pendingDonationRequest = [],
     isPending: isPendingDonationRequestPending,
@@ -12,7 +13,7 @@ const usePendingDonationRequest = () => {
   } = useQuery({
     queryKey: ["pending-donation-request"],
     queryFn: async () => {
-      const response = await axiosSecure.get(`/pending-donation-requests`);
+      const response = await axiosPublic.get(`/pending-donation-requests`);
 
       return response.data;
     },

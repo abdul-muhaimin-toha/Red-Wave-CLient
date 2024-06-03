@@ -1,12 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../axios/useAxiosSecure";
+
+import useAxiosPublic from "../axios/useAxiosPublic";
 
 const useDonorBySearch = (
   selectedBloodGroup,
   selectedDistrict,
   selectedUpazila,
 ) => {
-  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
 
   const {
     data: allDonor = [],
@@ -22,7 +23,7 @@ const useDonorBySearch = (
       selectedUpazila,
     ],
     queryFn: async () => {
-      const response = await axiosSecure.get(
+      const response = await axiosPublic.get(
         `/users-by-search?bloodGroup=${selectedBloodGroup}&district=${selectedDistrict}&upazila=${selectedUpazila}`,
       );
 

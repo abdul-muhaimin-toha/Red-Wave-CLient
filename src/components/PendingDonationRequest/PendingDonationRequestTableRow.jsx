@@ -1,6 +1,7 @@
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import { Button } from "../ui/button";
 import { TableCell, TableRow } from "../ui/table";
+import { Link } from "react-router-dom";
 
 const PendingDonationRequestTableRow = ({ donation }) => {
   const {
@@ -20,9 +21,11 @@ const PendingDonationRequestTableRow = ({ donation }) => {
       <TableCell>{new Date(donation_date).toLocaleDateString()}</TableCell>
       <TableCell>{donation_time}</TableCell>
       <TableCell>
-        <Button size="icon" className="my-1">
-          <FaArrowAltCircleRight />
-        </Button>
+        <Link to={`/blood-donation-request-details/${_id}`}>
+          <Button size="icon" className="my-1">
+            <FaArrowAltCircleRight />
+          </Button>
+        </Link>
       </TableCell>
     </TableRow>
   );
