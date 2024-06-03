@@ -34,7 +34,7 @@ const SearchPage = () => {
   };
 
   return (
-    <>
+    <div>
       <section>
         <div className="mx-auto max-w-screen-2xl px-4">
           <div className="flex items-center justify-center">
@@ -113,7 +113,7 @@ const SearchPage = () => {
       <section>
         <div className="mx-auto max-w-screen-2xl px-4">
           <div className="mb-10 flex  items-center justify-center  md:mb-20">
-            <div className="grid h-60 w-full grid-cols-1 gap-8  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="grid w-full grid-cols-1 gap-8  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {allDonor.map((donor) => (
                 <SearchDonorCard key={donor._id} donor={donor} />
               ))}
@@ -121,7 +121,7 @@ const SearchPage = () => {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 

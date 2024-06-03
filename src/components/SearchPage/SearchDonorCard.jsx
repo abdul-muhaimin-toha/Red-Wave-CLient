@@ -1,13 +1,13 @@
 const SearchDonorCard = ({ donor }) => {
   const { name, email, bloodGroup, upazila, district, image_url } = donor;
   return (
-    <div className="border p-4">
+    <div className="col-span-1 border p-6">
       <img
-        src={"https://i.ibb.co/KFy2gVR/tamim.jpg"}
+        src={image_url}
         alt="User Photo"
-        className="h-60 w-full rounded border-2 border-primary object-cover"
+        className="mb-8 h-60 w-full rounded border-2 border-primary object-cover"
       />
-      <h4 className="my-3 text-xl font-bold text-primary">A Positive</h4>
+      <h4 className="my-3 text-xl font-bold text-primary">{bloodGroup}</h4>
       <h3 className="text-xl font-semibold">{name}</h3>
       <p className="my-1 text-sm">Email: {email}</p>
 

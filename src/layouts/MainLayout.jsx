@@ -9,7 +9,7 @@ const MainLayout = () => {
       <main className="min-h-[calc(100vh-250px)] pt-20">
         <Outlet />
       </main>
-      {/* <FooterMain /> */}
+      <FooterMain />
     </>
   );
 };
