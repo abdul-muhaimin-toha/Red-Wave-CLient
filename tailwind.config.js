@@ -55,6 +55,12 @@ module.exports = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
+      backgroundImage: {
+        "hero-slider-1": "url('/src/assets/sliders/slider-1.jpg')",
+        "hero-slider-2": "url('/src/assets/sliders/slider-2.jpg')",
+        "hero-slider-3": "url('/src/assets/sliders/slider-3.jpg')",
+        "hero-slider-4": "url('/src/assets/sliders/slider-4.jpg')",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
