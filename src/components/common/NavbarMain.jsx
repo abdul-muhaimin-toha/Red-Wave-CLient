@@ -96,7 +96,9 @@ const NavbarMain = () => {
                           <Link to="/">Home</Link>
                         </div>
                         <div className=" border-b-2 px-2 py-5 transition-all duration-200 hover:text-primary/70">
-                          <Link>Donation Requests</Link>
+                          <Link to="/blood-donation-requests">
+                            Donation Requests
+                          </Link>
                         </div>
                         <div className=" border-b-2 px-2 py-5 transition-all duration-200 hover:text-primary/70">
                           <Link>Blog</Link>
@@ -125,7 +127,7 @@ const NavbarMain = () => {
                 <Link to="/">Home</Link>
               </div>
               <div className="transition-all duration-200 hover:text-primary/70">
-                <Link>Donation Requests</Link>
+                <Link to="/blood-donation-requests">Donation Requests</Link>
               </div>
               <div className="transition-all duration-200 hover:text-primary/70">
                 <Link>Blog</Link>

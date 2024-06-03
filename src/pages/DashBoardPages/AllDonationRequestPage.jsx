@@ -72,8 +72,9 @@ const AllDonationRequestPage = () => {
                 <TableHead>Status</TableHead>
                 {userRole === "admin" && <TableHead>Edit</TableHead>}
                 {userRole === "admin" && <TableHead>Delete</TableHead>}
-
-                <TableHead className="text-right">View</TableHead>
+                {userRole === "admin" && (
+                  <TableHead className="text-right">View</TableHead>
+                )}
               </TableRow>
             </TableHeader>
             <TableBody>

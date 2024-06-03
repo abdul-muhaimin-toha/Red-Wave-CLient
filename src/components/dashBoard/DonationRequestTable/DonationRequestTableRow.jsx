@@ -67,12 +67,15 @@ const DonationRequestTableRow = ({ donation, refetch }) => {
       <TableCell>{new Date(donation_date).toLocaleDateString()}</TableCell>
       <TableCell>{donation_time}</TableCell>
       <TableCell>{donation_status}</TableCell>
+
       <TableCell>
-        <Link to={`/dashboard/update-donation-request/${_id}`}>
-          <Button size="icon" className="my-1">
-            <FaEdit />
-          </Button>
-        </Link>
+        {userRole === "admin" && (
+          <Link to={`/dashboard/update-donation-request/${_id}`}>
+            <Button size="icon" className="my-1">
+              <FaEdit />
+            </Button>
+          </Link>
+        )}
       </TableCell>
       <TableCell>
         {userRole === "admin" && (

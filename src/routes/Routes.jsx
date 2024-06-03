@@ -18,6 +18,7 @@ import MyDonationRequestPage from "@/pages/DashBoardPages/MyDonationRequestPage"
 import UpdateDonationPage from "@/pages/DashBoardPages/UpdateDonationPage";
 import AllDonationRequestPage from "@/pages/DashBoardPages/AllDonationRequestPage";
 import SearchPage from "@/pages/SearchPage/SearchPage";
+import BloodDonationRequest from "@/pages/BloodDonationRequest/BloodDonationRequest";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: "search",
         element: <SearchPage />,
+      },
+      {
+        path: "blood-donation-requests",
+        element: <BloodDonationRequest />,
       },
       {
         path: "sign-in",
