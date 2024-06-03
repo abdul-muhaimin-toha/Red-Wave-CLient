@@ -112,7 +112,13 @@ const SearchPage = () => {
       </section>
       <section>
         <div className="mx-auto max-w-screen-2xl px-4">
-          <div className="mb-10 flex  items-center justify-center  md:mb-20">
+          <div className="mb-10 flex flex-col  items-center justify-center  md:mb-20">
+            {!allDonor.length && (
+              <h3 className="mx-auto max-w-screen-sm text-center text-lg">
+                No donor avaiable for Blood Group: B Positive, Upazila: Barishal
+                Sadar, District: Barishal
+              </h3>
+            )}
             <div className="grid w-full grid-cols-1 gap-8  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {allDonor.map((donor) => (
                 <SearchDonorCard key={donor._id} donor={donor} />
