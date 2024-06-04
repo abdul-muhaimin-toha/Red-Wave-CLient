@@ -12,6 +12,7 @@ const useAllBlogs = (filterValue) => {
     error,
   } = useQuery({
     queryKey: ["all-blogs", filterValue],
+    enabled: !!sessionStorage.getItem("access-token"),
     queryFn: async () => {
       const response = await axiosSecure.get(`/blogs?status=${filterValue}`);
 

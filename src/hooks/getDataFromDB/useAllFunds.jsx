@@ -12,6 +12,7 @@ const useAllFunds = () => {
     error,
   } = useQuery({
     queryKey: ["all-funds"],
+    enabled: !!sessionStorage.getItem("access-token"),
     queryFn: async () => {
       const response = await axiosSecure.get("/funds");
 

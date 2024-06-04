@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../axios/useAxiosSecure";
+import useAxiosPublic from "../axios/useAxiosPublic";
 
 const useDistricts = () => {
-  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const {
     data: districts = [],
     isPending: isDistrictsPending,
@@ -12,7 +13,7 @@ const useDistricts = () => {
   } = useQuery({
     queryKey: ["districts"],
     queryFn: async () => {
-      const response = await axiosSecure.get("/districts");
+      const response = await axiosPublic.get("/districts");
 
       return response.data;
     },

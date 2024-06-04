@@ -7,7 +7,7 @@ import useRole from "@/hooks/getDataFromDB/useRole";
 const DashBoardHome = () => {
   const { user } = useAuth();
   const { userFromDB } = useUser(user.email);
-  const { userRole, isUserRoleLoading } = useRole();
+  const { userRole, isUserRolePending } = useRole();
 
   return (
     <>

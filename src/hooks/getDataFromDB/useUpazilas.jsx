@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../axios/useAxiosSecure";
+
+import useAxiosPublic from "../axios/useAxiosPublic";
 
 const useUpazilas = () => {
-  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const {
     data: upazilas = [],
     isPending: isUpazilasPending,
@@ -12,7 +13,7 @@ const useUpazilas = () => {
   } = useQuery({
     queryKey: ["upazilas"],
     queryFn: async () => {
-      const response = await axiosSecure.get("/upazilas");
+      const response = await axiosPublic.get("/upazilas");
 
       return response.data;
     },

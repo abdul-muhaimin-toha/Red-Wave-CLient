@@ -21,7 +21,7 @@ import useRole from "@/hooks/getDataFromDB/useRole";
 
 const AllDonationRequestPage = () => {
   const [filterValue, setFilterValue] = useState("");
-  const { userRole, isUserRoleLoading } = useRole();
+  const { userRole, isUserRolePending } = useRole();
   const { allDonationRequest, refetch } = useAllDonationRequest(filterValue);
 
   return (

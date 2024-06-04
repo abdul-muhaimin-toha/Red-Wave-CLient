@@ -23,6 +23,8 @@ import BloodDonationRequestDetails from "@/pages/BloodDonationRequestDetails/Blo
 import BlogPage from "@/pages/BlogPage/BlogPage";
 import SingleBlog from "@/pages/SingleBlog/SingleBlog";
 import Funding from "@/pages/Funding/Funding";
+import AdminRoute from "./AdminRoute";
+import AdminAndVolunteerRoute from "./AdminAndVolunteerRoute";
 
 export const router = createBrowserRouter([
   {
@@ -117,15 +119,27 @@ export const router = createBrowserRouter([
       },
       {
         path: "all-donation-requests",
-        element: <AllDonationRequestPage />,
+        element: (
+          <AdminAndVolunteerRoute>
+            <AllDonationRequestPage />
+          </AdminAndVolunteerRoute>
+        ),
       },
       {
         path: "all-users",
-        element: <AllUsersPage />,
+        element: (
+          <AdminRoute>
+            <AllUsersPage />
+          </AdminRoute>
+        ),
       },
       {
         path: "content-management",
-        element: <ContentManagement />,
+        element: (
+          <AdminAndVolunteerRoute>
+            <ContentManagement />
+          </AdminAndVolunteerRoute>
+        ),
       },
       {
         path: "content-management/add-blog",

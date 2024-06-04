@@ -18,7 +18,7 @@ import useRole from "@/hooks/getDataFromDB/useRole";
 const ContentManagementTableRow = ({ blog, refetch }) => {
   const axiosSecure = useAxiosSecure();
   const { _id, image_url, title, status } = blog;
-  const { userRole, isUserRoleLoading } = useRole();
+  const { userRole, isUserRolePending } = useRole();
 
   const handleBlogStatus = (newStatus) => {
     axiosSecure

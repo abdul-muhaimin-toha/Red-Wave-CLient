@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 
 const DonationRequestTableRow = ({ donation, refetch }) => {
   const axiosSecure = useAxiosSecure();
-  const { userRole, isUserRoleLoading } = useRole();
+  const { userRole, isUserRolePending } = useRole();
   const {
     _id,
     recipient_name,

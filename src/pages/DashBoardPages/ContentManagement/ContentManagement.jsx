@@ -23,7 +23,7 @@ import { Link } from "react-router-dom";
 
 const ContentManagement = () => {
   const [filterValue, setFilterValue] = useState("");
-  const { userRole, isUserRoleLoading } = useRole();
+  const { userRole, isUserRolePending } = useRole();
   const { allBlogs, refetch } = useAllBlogs(filterValue);
   return (
     <section>

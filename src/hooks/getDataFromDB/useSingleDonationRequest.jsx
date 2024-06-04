@@ -12,6 +12,7 @@ const useSingleDonationRequest = (id) => {
     error,
   } = useQuery({
     queryKey: ["donation-req-single", id],
+    enabled: !!sessionStorage.getItem("access-token"),
     queryFn: async () => {
       const response = await axiosSecure.get(`/donation-request-single/${id}`);
 

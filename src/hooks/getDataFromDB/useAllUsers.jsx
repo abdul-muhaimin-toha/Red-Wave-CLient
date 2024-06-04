@@ -12,6 +12,7 @@ const useAllUsers = (filterValue) => {
     error,
   } = useQuery({
     queryKey: ["all-users", filterValue],
+    enabled: !!sessionStorage.getItem("access-token"),
     queryFn: async () => {
       const response = await axiosSecure.get(`/users?status=${filterValue}`);
 

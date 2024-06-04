@@ -11,6 +11,7 @@ const useAllDonationRequest = (filterValue) => {
     error,
   } = useQuery({
     queryKey: ["all-donation-request", filterValue],
+    enabled: !!sessionStorage.getItem("access-token"),
     queryFn: async () => {
       const response = await axiosSecure.get(
         `/donation-requests?status=${filterValue}`,

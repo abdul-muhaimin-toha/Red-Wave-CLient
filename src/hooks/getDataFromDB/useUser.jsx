@@ -12,6 +12,7 @@ const useUser = (userEmail) => {
     error,
   } = useQuery({
     queryKey: ["user", userEmail],
+    enabled: !!sessionStorage.getItem("access-token"),
     queryFn: async () => {
       const response = await axiosSecure.get(`/users/${userEmail}`);
 
