@@ -105,7 +105,7 @@ const NavbarMain = () => {
                         </div>
                         {user && (
                           <div className=" border-b-2 px-2 py-5 transition-all duration-200 hover:text-primary/70">
-                            <Link>Fundings</Link>
+                            <Link to="/funds">Fundings</Link>
                           </div>
                         )}
                         {!user && (
@@ -134,7 +134,7 @@ const NavbarMain = () => {
               </div>
               {user && (
                 <div className="transition-all duration-200 hover:text-primary/70">
-                  <Link>Fundings</Link>
+                  <Link to="/funds">Fundings</Link>
                 </div>
               )}
             </div>
@@ -177,9 +177,9 @@ const NavbarMain = () => {
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuGroup>
-                    <DropdownMenuItem>
-                      <Link to="/dashboard">Dashboard</Link>
-                    </DropdownMenuItem>
+                    <Link to="/dashboard">
+                      <DropdownMenuItem>Dashboard</DropdownMenuItem>
+                    </Link>
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleLogOut}>

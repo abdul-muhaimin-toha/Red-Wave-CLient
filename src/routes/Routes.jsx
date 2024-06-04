@@ -22,6 +22,7 @@ import BloodDonationRequest from "@/pages/BloodDonationRequest/BloodDonationRequ
 import BloodDonationRequestDetails from "@/pages/BloodDonationRequestDetails/BloodDonationRequestDetails";
 import BlogPage from "@/pages/BlogPage/BlogPage";
 import SingleBlog from "@/pages/SingleBlog/SingleBlog";
+import Funding from "@/pages/Funding/Funding";
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +48,14 @@ export const router = createBrowserRouter([
       {
         path: "blood-donation-requests",
         element: <BloodDonationRequest />,
+      },
+      {
+        path: "funds",
+        element: (
+          <PrivateRoute>
+            <Funding />
+          </PrivateRoute>
+        ),
       },
       {
         path: "blood-donation-request-details/:id",

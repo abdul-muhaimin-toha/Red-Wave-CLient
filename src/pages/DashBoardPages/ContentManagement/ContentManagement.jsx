@@ -66,29 +66,29 @@ const ContentManagement = () => {
                   </DropdownMenuContent>
                 </DropdownMenu>
               </div>
-              <div className=" mb-12 mt-5 w-full">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Thumbnail</TableHead>
-                      <TableHead>Title</TableHead>
-                      <TableHead>Status</TableHead>
-                      {userRole === "admin" && (
-                        <TableHead className="text-right">Action</TableHead>
-                      )}
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {allBlogs.map((blog) => (
-                      <ContentManagementTableRow
-                        key={blog._id}
-                        blog={blog}
-                        refetch={refetch}
-                      />
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
+            </div>
+            <div className=" mb-12 mt-5 w-full">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Thumbnail</TableHead>
+                    <TableHead>Title</TableHead>
+                    <TableHead>Status</TableHead>
+                    {userRole === "admin" && (
+                      <TableHead className="text-right">Action</TableHead>
+                    )}
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {allBlogs.map((blog) => (
+                    <ContentManagementTableRow
+                      key={blog._id}
+                      blog={blog}
+                      refetch={refetch}
+                    />
+                  ))}
+                </TableBody>
+              </Table>
             </div>
           </div>
         </div>

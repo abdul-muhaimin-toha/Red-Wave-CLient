@@ -25,7 +25,7 @@ const SingleBlog = () => {
                 <img
                   src={singleBlog.image_url}
                   alt="thumbnail"
-                  className="h-70 w-full object-cover"
+                  className="h-56 w-full object-cover"
                 />
               </div>
               <div>{content}</div>
