@@ -20,7 +20,7 @@ import { useState } from "react";
 // This is your test publishable API key.
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PK);
 
-const FundingModal = () => {
+const FundingModal = ({ refetch }) => {
   const [amount, setAmount] = useState(5);
   const { user } = useAuth();
   return (
@@ -61,7 +61,7 @@ const FundingModal = () => {
           {/* Stripe Payment Elements */}
           <div className="mt-2">
             <Elements stripe={stripePromise}>
-              <CheckoutForm amount={amount} />
+              <CheckoutForm amount={amount} refetch={refetch} />
             </Elements>
           </div>
         </div>

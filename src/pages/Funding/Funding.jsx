@@ -1,3 +1,4 @@
+import FundTableRow from "@/components/Funding/FundTableRow";
 import FundingModal from "@/components/Funding/FundingModal";
 import {
   Table,
@@ -6,15 +7,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import useAllFunds from "@/hooks/getDataFromDB/useAllFunds";
 import React from "react";
 
 const Funding = () => {
+  const { allFunds, isAllFundsPending, refetch } = useAllFunds();
   return (
     <div className="mx-auto max-w-screen-2xl px-4 py-16">
       <div className="flex items-center justify-center ">
         <div className="w-full rounded-md border-2 p-5  md:p-8 lg:w-4/5 xl:w-4/5 ">
           <div className="flex justify-end pb-10">
-            <FundingModal />
+            <FundingModal refetch={refetch} />
           </div>
           <div className="mx-auto max-w-2xl  text-center md:p-6">
             <h3 className=" pb-4 text-center text-2xl font-semibold uppercase md:text-3xl">
@@ -31,7 +34,11 @@ const Funding = () => {
                   <TableHead>Date</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody></TableBody>
+              <TableBody>
+                {allFunds.map((fund) => (
+                  <FundTableRow key={fund._id} fund={fund} />
+                ))}
+              </TableBody>
             </Table>
           </div>
         </div>

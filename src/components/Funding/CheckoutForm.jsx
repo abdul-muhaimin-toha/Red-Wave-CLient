@@ -6,7 +6,7 @@ import useAxiosSecure from "@/hooks/axios/useAxiosSecure";
 import useAuth from "@/hooks/auth/useAuth";
 import { toast } from "../ui/use-toast";
 
-const CheckoutForm = ({ amount }) => {
+const CheckoutForm = ({ amount, refetch }) => {
   const { user } = useAuth();
   const stripe = useStripe();
   const elements = useElements();
@@ -81,6 +81,7 @@ const CheckoutForm = ({ amount }) => {
         .post("/funds", paymentInfo)
         .then((res) => {
           console.log(res.data);
+          refetch();
           toast({
             title: "Congratulation",
             description: `Donation made successfully`,
