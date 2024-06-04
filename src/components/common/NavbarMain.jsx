@@ -101,7 +101,7 @@ const NavbarMain = () => {
                           </Link>
                         </div>
                         <div className=" border-b-2 px-2 py-5 transition-all duration-200 hover:text-primary/70">
-                          <Link>Blog</Link>
+                          <Link to="/blogs">Blog</Link>
                         </div>
                         {user && (
                           <div className=" border-b-2 px-2 py-5 transition-all duration-200 hover:text-primary/70">
@@ -130,7 +130,7 @@ const NavbarMain = () => {
                 <Link to="/blood-donation-requests">Donation Requests</Link>
               </div>
               <div className="transition-all duration-200 hover:text-primary/70">
-                <Link>Blog</Link>
+                <Link to="/blogs">Blog</Link>
               </div>
               {user && (
                 <div className="transition-all duration-200 hover:text-primary/70">
