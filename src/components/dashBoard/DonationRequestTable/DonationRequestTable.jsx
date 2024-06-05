@@ -22,8 +22,6 @@ const DonationRequestTable = () => {
     3,
   );
 
-  console.log(donationRequestForUser);
-
   if (!donationRequestForUser.length > 0) return;
 
   return (
@@ -43,10 +41,13 @@ const DonationRequestTable = () => {
                 <TableHead>Donation Date</TableHead>
                 <TableHead>Donation Time</TableHead>
                 <TableHead>Status</TableHead>
+                <TableHead>Donor Name</TableHead>
+                <TableHead>Donor Email</TableHead>
 
                 <TableHead>Edit</TableHead>
                 <TableHead>Delete</TableHead>
-                <TableHead className="text-right">View</TableHead>
+                <TableHead>View</TableHead>
+                <TableHead className="text-right">Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

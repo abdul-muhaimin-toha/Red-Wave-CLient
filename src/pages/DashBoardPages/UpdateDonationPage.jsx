@@ -64,7 +64,7 @@ const UpdateDonationRequest = () => {
       donation_status: "pending",
     };
     axiosSecure
-      .put("/donation-request-single", requestData)
+      .put(`/donation-request-single/${donationRequestSingle._id}`, requestData)
       .then((res) => {
         if (res.data.modifiedCount > 0) {
           console.log(res.data);
@@ -87,6 +87,8 @@ const UpdateDonationRequest = () => {
   };
 
   if (isDistrictsPending || isUpazilasPending) return;
+
+  console.log(donationRequestSingle._id, "ffffff");
 
   return (
     <section>

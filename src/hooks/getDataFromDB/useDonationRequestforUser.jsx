@@ -14,7 +14,7 @@ const useDonationRequestforUser = (userEmail, filter, limit) => {
     enabled: !!sessionStorage.getItem("access-token"),
     queryFn: async () => {
       const response = await axiosSecure.get(
-        `/donation-requests/${userEmail}?limit=${limit}&status=${filter}`,
+        `/donation-requests-for-user/${userEmail}?limit=${limit}&status=${filter}`,
       );
 
       return response.data;
