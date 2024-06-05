@@ -23,6 +23,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PK);
 const FundingModal = ({ refetch }) => {
   const [amount, setAmount] = useState(5);
   const { user } = useAuth();
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -54,7 +55,7 @@ const FundingModal = ({ refetch }) => {
             <Input
               id="amount"
               type="number"
-              onChange={(e) => setAmount(e.target.value)}
+              onChange={(e) => setAmount(+e.target.value)}
               defaultValue={amount}
             />
           </div>

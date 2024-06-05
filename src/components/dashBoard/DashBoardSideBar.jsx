@@ -130,18 +130,20 @@ const DashBoardSideBar = () => {
                 </NavLink>
               </li>
             )}
-            <li>
-              <NavLink
-                to="/dashboard/content-management/add-blog"
-                end
-                className={({ isActive }) =>
-                  `flex items-center space-x-3 rounded-md px-2 py-3 ${isActive ? "bg-accent" : ""}`
-                }
-              >
-                <CiPen className="h-5 w-5 fill-current" />
-                <span className="capitalize">Add blog</span>
-              </NavLink>
-            </li>
+            {(userRole === "admin" || userRole === "volunteer") && (
+              <li>
+                <NavLink
+                  to="/dashboard/content-management/add-blog"
+                  end
+                  className={({ isActive }) =>
+                    `flex items-center space-x-3 rounded-md px-2 py-3 ${isActive ? "bg-accent" : ""}`
+                  }
+                >
+                  <CiPen className="h-5 w-5 fill-current" />
+                  <span className="capitalize">Add blog</span>
+                </NavLink>
+              </li>
+            )}
           </ul>
           <ul className="space-y-1 pt-4 text-sm">
             <li>

@@ -1,6 +1,9 @@
+import useTotalStats from "@/hooks/getDataFromDB/useTotalStats";
 import { Users } from "lucide-react";
 
 const AdminDashBoard = () => {
+  const { totalStats, isTotalStatsPending } = useTotalStats();
+
   return (
     <section>
       <div className="mx-4">
@@ -11,7 +14,9 @@ const AdminDashBoard = () => {
                 <Users className="text-black" />
               </div>
               <div className="text-white">
-                <p className="text-3xl font-semibold">116</p>
+                <p className="text-3xl font-semibold">
+                  {totalStats["total-users"]}
+                </p>
                 <h4 className="font-2xl font-semibold">Total Users</h4>
               </div>
             </div>
@@ -20,7 +25,9 @@ const AdminDashBoard = () => {
                 <Users className="text-black" />
               </div>
               <div className="text-white">
-                <p className="text-3xl font-semibold">116</p>
+                <p className="text-3xl font-semibold">
+                  {totalStats["total-funds"]}
+                </p>
                 <h4 className="font-2xl font-semibold">Total Fundings</h4>
               </div>
             </div>
@@ -29,7 +36,9 @@ const AdminDashBoard = () => {
                 <Users className="text-black" />
               </div>
               <div className="text-white">
-                <p className="text-3xl font-semibold">116</p>
+                <p className="text-3xl font-semibold">
+                  {totalStats["total-donation-request"]}
+                </p>
                 <h4 className="font-2xl font-semibold">
                   Total Donation Requests
                 </h4>

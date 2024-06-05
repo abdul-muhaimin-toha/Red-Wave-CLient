@@ -143,7 +143,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "content-management/add-blog",
-        element: <AddBlog />,
+        element: (
+          <AdminAndVolunteerRoute>
+            <AddBlog />
+          </AdminAndVolunteerRoute>
+        ),
       },
     ],
   },
