@@ -23,7 +23,7 @@ import useAuth from "@/hooks/auth/useAuth";
 import useAxiosSecure from "@/hooks/axios/useAxiosSecure";
 
 import useSingleDonationRequest from "@/hooks/getDataFromDB/useSingleDonationRequest";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const BloodDonationRequestDetails = () => {
   const { id } = useParams();

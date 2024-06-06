@@ -6,16 +6,34 @@ import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 import { FaUserFriends, FaBookOpen } from "react-icons/fa";
 import { MdBloodtype, MdCreate } from "react-icons/md";
-import { BiDonateHeart } from "react-icons/bi";
+import { BiDonateHeart, BiLogOut } from "react-icons/bi";
 import { CiPen } from "react-icons/ci";
 import useRole from "@/hooks/getDataFromDB/useRole";
+import { toast } from "../ui/use-toast";
 
 const DashBoardSideBar = () => {
   const [isSideBarVisible, setIsSideBarVisible] = useState("false");
   const { userRole, isUserRolePending } = useRole();
+  const { user, logout } = useAuth();
 
   const handleSideBar = () => {
     setIsSideBarVisible(!isSideBarVisible);
+  };
+
+  const handleLogOut = () => {
+    logout()
+      .then(() => {
+        toast({
+          title: "Successfully logged out!",
+        });
+      })
+      .catch((error) => {
+        console.error(error.message);
+        toast({
+          title: "Something went wrong!",
+          description: `${error.message}`,
+        });
+      });
   };
 
   return (
@@ -51,7 +69,7 @@ const DashBoardSideBar = () => {
                 to="/dashboard"
                 end
                 className={({ isActive }) =>
-                  `flex items-center space-x-3 rounded-md px-2 py-3 ${isActive ? "bg-accent" : ""}`
+                  `flex items-center space-x-3 rounded-md px-2 py-3 hover:bg-primary ${isActive ? "bg-accent" : ""}`
                 }
               >
                 <svg
@@ -69,7 +87,7 @@ const DashBoardSideBar = () => {
                 to="/dashboard/my-donation-requests"
                 end
                 className={({ isActive }) =>
-                  `flex items-center space-x-3 rounded-md px-2 py-3 ${isActive ? "bg-accent" : ""}`
+                  `flex items-center space-x-3 rounded-md px-2 py-3 hover:bg-primary ${isActive ? "bg-accent" : ""}`
                 }
               >
                 <MdBloodtype className="h-5 w-5 fill-current" />
@@ -81,7 +99,7 @@ const DashBoardSideBar = () => {
                 to="/dashboard/create-donation-request"
                 end
                 className={({ isActive }) =>
-                  `flex items-center space-x-3 rounded-md px-2 py-3 ${isActive ? "bg-accent" : ""}`
+                  `flex items-center space-x-3 rounded-md px-2 py-3 hover:bg-primary ${isActive ? "bg-accent" : ""}`
                 }
               >
                 <MdCreate className="h-5 w-5 fill-current" />
@@ -94,7 +112,7 @@ const DashBoardSideBar = () => {
                   to="/dashboard/all-users"
                   end
                   className={({ isActive }) =>
-                    `flex items-center space-x-3 rounded-md px-2 py-3 ${isActive ? "bg-accent" : ""}`
+                    `flex items-center space-x-3 rounded-md px-2 py-3 hover:bg-primary ${isActive ? "bg-accent" : ""}`
                   }
                 >
                   <FaUserFriends className="h-5 w-5 fill-current" />
@@ -108,7 +126,7 @@ const DashBoardSideBar = () => {
                   to="/dashboard/all-donation-requests"
                   end
                   className={({ isActive }) =>
-                    `flex items-center space-x-3 rounded-md px-2 py-3 ${isActive ? "bg-accent" : ""}`
+                    `flex items-center space-x-3 rounded-md px-2 py-3 hover:bg-primary ${isActive ? "bg-accent" : ""}`
                   }
                 >
                   <BiDonateHeart className="h-5 w-5 fill-current" />
@@ -122,7 +140,7 @@ const DashBoardSideBar = () => {
                   to="/dashboard/content-management"
                   end
                   className={({ isActive }) =>
-                    `flex items-center space-x-3 rounded-md px-2 py-3 ${isActive ? "bg-accent" : ""}`
+                    `flex items-center space-x-3 rounded-md px-2 py-3 hover:bg-primary ${isActive ? "bg-accent" : ""}`
                   }
                 >
                   <FaBookOpen className="h-5 w-5 fill-current" />
@@ -136,7 +154,7 @@ const DashBoardSideBar = () => {
                   to="/dashboard/content-management/add-blog"
                   end
                   className={({ isActive }) =>
-                    `flex items-center space-x-3 rounded-md px-2 py-3 ${isActive ? "bg-accent" : ""}`
+                    `flex items-center space-x-3 rounded-md px-2 py-3 hover:bg-primary ${isActive ? "bg-accent" : ""}`
                   }
                 >
                   <CiPen className="h-5 w-5 fill-current" />
@@ -145,18 +163,27 @@ const DashBoardSideBar = () => {
               </li>
             )}
           </ul>
-          <ul className="space-y-1 pt-4 text-sm">
+          <ul className=" space-y-3  pt-6 text-sm">
             <li>
               <NavLink
                 to="/dashboard/profile"
                 end
                 className={({ isActive }) =>
-                  `flex items-center space-x-3 rounded-md px-2 py-3 ${isActive ? "bg-accent" : ""}`
+                  `flex items-center space-x-3 rounded-md px-2 py-3 hover:bg-primary ${isActive ? "bg-accent" : ""}`
                 }
               >
                 <RxAvatar className="h-5 w-5" />
                 <span>View Profile</span>
               </NavLink>
+            </li>
+            <li>
+              <Button
+                onClick={handleLogOut}
+                className="flex w-full items-center justify-start space-x-3 rounded-md bg-accent px-2 py-5 text-left"
+              >
+                <BiLogOut className="h-5 w-5" />
+                <span>Logout</span>
+              </Button>
             </li>
           </ul>
         </div>

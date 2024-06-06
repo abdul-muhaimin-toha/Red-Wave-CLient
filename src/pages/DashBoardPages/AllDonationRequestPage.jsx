@@ -70,10 +70,15 @@ const AllDonationRequestPage = () => {
                 <TableHead>Donation Date</TableHead>
                 <TableHead>Donation Time</TableHead>
                 <TableHead>Status</TableHead>
+                <TableHead>Donor Name</TableHead>
+                <TableHead>Donor Email</TableHead>
                 {userRole === "admin" && <TableHead>Edit</TableHead>}
                 {userRole === "admin" && <TableHead>Delete</TableHead>}
                 {userRole === "admin" && (
                   <TableHead className="text-right">View</TableHead>
+                )}
+                {userRole === "admin" && (
+                  <TableHead className="text-right">Action</TableHead>
                 )}
               </TableRow>
             </TableHeader>
