@@ -1,6 +1,8 @@
+import useAuth from "@/hooks/auth/useAuth";
 import { Link } from "react-router-dom";
 
 const FooterMain = () => {
+  const { user } = useAuth();
   return (
     <footer className="border-t-4">
       <div className="mx-auto max-w-screen-2xl px-4">
@@ -18,14 +20,21 @@ const FooterMain = () => {
                 <Link to="/">Home</Link>
               </div>
               <div className="transition-all duration-200 hover:text-primary/70">
-                <Link>Brand</Link>
+                <Link to="/blood-donation-requests">Donation Request</Link>
               </div>
               <div className="transition-all duration-200 hover:text-primary/70">
-                <Link>Contact Us</Link>
+                <Link to="/blogs">Blog</Link>
               </div>
-              <div className="transition-all duration-200 hover:text-primary/70">
-                <Link>Resources</Link>
-              </div>
+              {user && (
+                <div className="transition-all duration-200 hover:text-primary/70">
+                  <Link to="/funds">Funding</Link>
+                </div>
+              )}
+              {user && (
+                <div className="transition-all duration-200 hover:text-primary/70">
+                  <Link to="/dashboard">Dashboard</Link>
+                </div>
+              )}
             </div>
             <div className="flex flex-col gap-1 text-center text-sm">
               <p className="font-bold">Red Wave Corporation Ltd.</p>

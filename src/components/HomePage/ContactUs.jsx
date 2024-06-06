@@ -17,7 +17,7 @@ const ContactUs = () => {
     <section>
       <div className="mx-auto max-w-screen-2xl px-4">
         <div className="flex items-center justify-center ">
-          <Card className="my-16 w-full border-0 md:my-24 md:w-4/5 md:p-3 lg:w-4/5 xl:w-3/5">
+          <Card className="mb-16 w-full border-0 md:mb-24 md:w-4/5 md:p-3 lg:w-4/5 xl:w-3/5">
             <CardHeader className="space-y-2">
               <CardTitle className="text-center text-3xl  font-semibold uppercase">
                 Get in touch with us!
