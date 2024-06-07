@@ -7,20 +7,18 @@ import {
 } from "@/components/ui/table";
 import useAuth from "@/hooks/auth/useAuth";
 import useDonationRequestforUser from "@/hooks/getDataFromDB/useDonationRequestforUser";
-import DonationRequestTableRow from "./DonationRequestTableRow";
+
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import useUser from "@/hooks/getDataFromDB/useUser";
 import DonationRequestTableRowForDonor from "./DonationRequestTableRowForDonor";
+import Loader from "@/components/common/Loader";
 
 const DonationRequestTable = () => {
   const { user } = useAuth();
-  const { userFromDB } = useUser(user.email);
-  const { donationRequestForUser, refetch } = useDonationRequestforUser(
-    user.email,
-    "",
-    3,
-  );
+  const { donationRequestForUser, isDonationRequestPending, refetch } =
+    useDonationRequestforUser(user.email, "", 3);
+
+  if (isDonationRequestPending) return <Loader />;
 
   if (!donationRequestForUser.length > 0) return;
 

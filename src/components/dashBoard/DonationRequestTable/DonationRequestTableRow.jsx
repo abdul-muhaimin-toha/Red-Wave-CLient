@@ -19,6 +19,7 @@ import { BsThreeDots } from "react-icons/bs";
 import { FaArrowAltCircleRight, FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import Loader from "@/components/common/Loader";
 
 const DonationRequestTableRow = ({ donation, refetch, refetchTotal }) => {
   const axiosSecure = useAxiosSecure();
@@ -31,8 +32,6 @@ const DonationRequestTableRow = ({ donation, refetch, refetchTotal }) => {
     donation_date,
     donation_time,
     donation_status,
-    requester_name,
-    requester_email,
     donor_name,
     donor_email,
   } = donation;
@@ -91,6 +90,8 @@ const DonationRequestTableRow = ({ donation, refetch, refetchTotal }) => {
         });
       });
   };
+
+  if (isUserRolePending) return <Loader />;
 
   return (
     <TableRow>

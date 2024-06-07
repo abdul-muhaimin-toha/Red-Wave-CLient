@@ -1,5 +1,6 @@
 import FundTableRow from "@/components/Funding/FundTableRow";
 import FundingModal from "@/components/Funding/FundingModal";
+import Loader from "@/components/common/Loader";
 import {
   Table,
   TableBody,
@@ -8,10 +9,12 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import useAllFunds from "@/hooks/getDataFromDB/useAllFunds";
-import React from "react";
 
 const Funding = () => {
   const { allFunds, isAllFundsPending, refetch } = useAllFunds();
+
+  if (isAllFundsPending) return <Loader />;
+
   return (
     <div className="mx-auto max-w-screen-2xl px-4 py-16">
       <div className="flex items-center justify-center ">

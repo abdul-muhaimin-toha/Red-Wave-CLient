@@ -1,13 +1,14 @@
 import useAuth from "@/hooks/auth/useAuth";
 import AdminDashBoard from "./DashBoardHomePages/AdminDashBoard";
 import DonationRequestTable from "@/components/dashBoard/DonationRequestTable/DonationRequestTable";
-import useUser from "@/hooks/getDataFromDB/useUser";
 import useRole from "@/hooks/getDataFromDB/useRole";
+import Loader from "@/components/common/Loader";
 
 const DashBoardHome = () => {
   const { user } = useAuth();
-  const { userFromDB } = useUser(user.email);
   const { userRole, isUserRolePending } = useRole();
+
+  if (isUserRolePending) return <Loader />;
 
   return (
     <>

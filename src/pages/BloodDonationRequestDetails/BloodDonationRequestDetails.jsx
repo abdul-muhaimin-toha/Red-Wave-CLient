@@ -1,3 +1,4 @@
+import Loader from "@/components/common/Loader";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -23,7 +24,7 @@ import useAuth from "@/hooks/auth/useAuth";
 import useAxiosSecure from "@/hooks/axios/useAxiosSecure";
 
 import useSingleDonationRequest from "@/hooks/getDataFromDB/useSingleDonationRequest";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const BloodDonationRequestDetails = () => {
   const { id } = useParams();
@@ -74,6 +75,8 @@ const BloodDonationRequestDetails = () => {
         });
       });
   };
+
+  if (isDonationRequestSinglePending) return <Loader />;
 
   return (
     <section>
@@ -147,7 +150,7 @@ const BloodDonationRequestDetails = () => {
                 <DialogTrigger asChild>
                   {user.email === requester_email ? (
                     <p className="mx-auto text-center text-lg font-bold text-primary">
-                      Sorry You can't Donate on your own requested post
+                      Sorry You can&apos;t Donate on your own requested post
                     </p>
                   ) : (
                     <Button className="w-full" type="button">

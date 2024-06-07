@@ -7,12 +7,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
 import { TableCell, TableRow } from "@/components/ui/table";
 import { toast } from "@/components/ui/use-toast";
-import useAuth from "@/hooks/auth/useAuth";
 import useAxiosSecure from "@/hooks/axios/useAxiosSecure";
-import useUser from "@/hooks/getDataFromDB/useUser";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { BsThreeDots } from "react-icons/bs";
 import { FaArrowAltCircleRight, FaEdit } from "react-icons/fa";
@@ -25,8 +22,6 @@ const DonationRequestTableRowForDonor = ({
   refetchTotal,
 }) => {
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
-  const { userFromDB } = useUser(user.email);
   const {
     _id,
     recipient_name,
@@ -35,8 +30,6 @@ const DonationRequestTableRowForDonor = ({
     donation_date,
     donation_time,
     donation_status,
-    requester_name,
-    requester_email,
     donor_name,
     donor_email,
   } = donation;
@@ -66,7 +59,7 @@ const DonationRequestTableRowForDonor = ({
               });
             }
           })
-          .catch((err) => {
+          .catch(() => {
             Swal.fire({
               title: "Failed!",
               text: "File deletation failed.",

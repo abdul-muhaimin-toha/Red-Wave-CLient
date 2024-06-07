@@ -1,4 +1,5 @@
 import SearchDonorCard from "@/components/SearchPage/SearchDonorCard";
+import Loader from "@/components/common/Loader";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -44,6 +45,9 @@ const SearchPage = () => {
         title: "Successfully PDF generated!",
       }),
   });
+
+  if (isDistrictsPending || isUpazilasPending || isAllDonorPending)
+    return <Loader />;
 
   return (
     <div>

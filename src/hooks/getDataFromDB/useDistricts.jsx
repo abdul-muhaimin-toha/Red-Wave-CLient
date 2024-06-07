@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../axios/useAxiosSecure";
 import useAxiosPublic from "../axios/useAxiosPublic";
 
 const useDistricts = () => {

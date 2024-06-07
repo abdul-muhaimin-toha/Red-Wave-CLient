@@ -5,8 +5,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import useAuth from "@/hooks/auth/useAuth";
-import useDonationRequestforUser from "@/hooks/getDataFromDB/useDonationRequestforUser";
 import DonationRequestTableRow from "@/components/dashBoard/DonationRequestTable/DonationRequestTableRow";
 import {
   DropdownMenu,
@@ -20,19 +18,24 @@ import useAllDonationRequest from "@/hooks/getDataFromDB/useAllDonationRequest";
 import useRole from "@/hooks/getDataFromDB/useRole";
 import PaginationComponent from "@/components/common/PaginationComponent";
 import useTotalDonationRequest from "@/hooks/getDataFromDB/useTotalDonationRequest";
+import Loader from "@/components/common/Loader";
 
 const AllDonationRequestPage = () => {
   const [filterValue, setFilterValue] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const { userRole, isUserRolePending } = useRole();
   const postPerPage = 6;
-  const { allDonationRequest, refetch } = useAllDonationRequest(
-    filterValue,
-    postPerPage,
-    currentPage,
-  );
+  const { allDonationRequest, isAllDonationRequestPending, refetch } =
+    useAllDonationRequest(filterValue, postPerPage, currentPage);
   const { totalDonationRequest, isTotalDonationRequestPending, refetchTotal } =
     useTotalDonationRequest(filterValue);
+
+  if (
+    isUserRolePending ||
+    isAllDonationRequestPending ||
+    isTotalDonationRequestPending
+  )
+    return <Loader />;
 
   return (
     <div className="mx-auto max-w-screen-2xl  px-4">

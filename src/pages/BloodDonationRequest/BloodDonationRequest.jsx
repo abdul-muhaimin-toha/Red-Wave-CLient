@@ -1,4 +1,5 @@
 import PendingDonationRequestTableRow from "@/components/PendingDonationRequest/PendingDonationRequestTableRow";
+import Loader from "@/components/common/Loader";
 import {
   Table,
   TableBody,
@@ -11,6 +12,8 @@ import usePendingDonationRequest from "@/hooks/getDataFromDB/usePendingDonationR
 const BloodDonationRequest = () => {
   const { pendingDonationRequest, isPendingDonationRequestPending } =
     usePendingDonationRequest();
+
+  if (isPendingDonationRequestPending) return <Loader />;
 
   return (
     <div className="mx-auto max-w-screen-2xl px-4">

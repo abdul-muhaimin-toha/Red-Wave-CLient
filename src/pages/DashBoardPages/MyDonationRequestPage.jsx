@@ -19,6 +19,7 @@ import { useState } from "react";
 import DonationRequestTableRowForDonor from "@/components/dashBoard/DonationRequestTable/DonationRequestTableRowForDonor";
 import PaginationComponent from "@/components/common/PaginationComponent";
 import useTotalDonationRequestForUser from "@/hooks/getDataFromDB/useTotalDonationRequestForUser";
+import Loader from "@/components/common/Loader";
 
 const MyDonationRequestPage = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -26,17 +27,21 @@ const MyDonationRequestPage = () => {
   const { user } = useAuth();
   const postPerPage = 6;
 
-  const { donationRequestForUser, refetch } = useDonationRequestforUser(
-    user.email,
-    filterValue,
-    postPerPage,
-    currentPage,
-  );
+  const { donationRequestForUser, isDonationRequestPending, refetch } =
+    useDonationRequestforUser(
+      user.email,
+      filterValue,
+      postPerPage,
+      currentPage,
+    );
   const {
     totalDonationRequestForUser,
     isTotalDonationRequestForUserPending,
     refetchTotal,
   } = useTotalDonationRequestForUser(user.email, filterValue);
+
+  if (isDonationRequestPending || isTotalDonationRequestForUserPending)
+    return <Loader />;
 
   return (
     <div className="mx-auto max-w-screen-2xl  px-4">

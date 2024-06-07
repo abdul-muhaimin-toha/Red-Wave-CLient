@@ -1,8 +1,11 @@
+import Loader from "@/components/common/Loader";
 import useTotalStats from "@/hooks/getDataFromDB/useTotalStats";
 import { Users } from "lucide-react";
 
 const AdminDashBoard = () => {
   const { totalStats, isTotalStatsPending } = useTotalStats();
+
+  if (isTotalStatsPending) return <Loader />;
 
   return (
     <section>

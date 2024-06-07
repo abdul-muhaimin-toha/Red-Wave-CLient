@@ -1,4 +1,4 @@
-import AllUsersTableRow from "@/components/dashBoard/AllUsersTable/AllUsersTableRow";
+import Loader from "@/components/common/Loader";
 import ContentManagementTableRow from "@/components/dashBoard/ContentManagementTableRow";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,17 +14,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import useAuth from "@/hooks/auth/useAuth";
 import useAllBlogs from "@/hooks/getDataFromDB/useAllBlogs";
 import useRole from "@/hooks/getDataFromDB/useRole";
-import useUser from "@/hooks/getDataFromDB/useUser";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const ContentManagement = () => {
   const [filterValue, setFilterValue] = useState("");
   const { userRole, isUserRolePending } = useRole();
-  const { allBlogs, refetch } = useAllBlogs(filterValue);
+  const { allBlogs, isAllBlogsPending, refetch } = useAllBlogs(filterValue);
+
+  if (isUserRolePending || isAllBlogsPending) return <Loader />;
+
   return (
     <section>
       <div className="mx-auto max-w-screen-2xl  px-4">

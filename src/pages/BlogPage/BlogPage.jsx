@@ -1,8 +1,11 @@
 import BlogPageCard from "@/components/common/BlogPage/BlogPageCard";
+import Loader from "@/components/common/Loader";
 import usePublishedBlogs from "@/hooks/getDataFromDB/usePublishedBlogs";
 
 const BlogPage = () => {
   const { publishedBlogs, isPublishedBlogsPending } = usePublishedBlogs();
+
+  if (isPublishedBlogsPending) return <Loader />;
 
   return (
     <div className="mx-auto max-w-screen-2xl px-4">

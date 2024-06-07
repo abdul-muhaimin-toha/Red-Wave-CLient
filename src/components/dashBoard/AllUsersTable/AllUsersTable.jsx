@@ -5,30 +5,33 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import AllUsersTableRow from "./AllUsersTableRow";
-import useAllUsers from "@/hooks/getDataFromDB/useAllUsers";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import AllUsersTableRow from "./AllUsersTableRow";
+import useAllUsers from "@/hooks/getDataFromDB/useAllUsers";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import PaginationComponent from "@/components/common/PaginationComponent";
 import useTotalUsers from "@/hooks/getDataFromDB/useTotalUsers";
+import Loader from "@/components/common/Loader";
 
 const AllUsersTable = () => {
   const [filterValue, setFilterValue] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const postPerPage = 6;
 
-  const { allUsers, refetch } = useAllUsers(
+  const { allUsers, isAllUsersDataPending, refetch } = useAllUsers(
     filterValue,
     postPerPage,
     currentPage,
   );
   const { totalUsers, isTotalUsersPending } = useTotalUsers(filterValue);
+
+  if ((isAllUsersDataPending, isTotalUsersPending)) return <Loader />;
 
   return (
     <div className="mx-auto max-w-screen-2xl  px-4">

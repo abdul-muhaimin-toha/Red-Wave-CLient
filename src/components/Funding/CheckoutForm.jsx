@@ -24,6 +24,7 @@ const CheckoutForm = ({ amount, refetch }) => {
         setClientSecret(res.data.clientSecret);
       })
       .catch((err) => console.log(err.message));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [amount]);
 
   const handleSubmit = async (event) => {

@@ -11,11 +11,12 @@ import { CiPen } from "react-icons/ci";
 import useRole from "@/hooks/getDataFromDB/useRole";
 import { toast } from "../ui/use-toast";
 import ThemeToggler from "../theme/ThemeToggler";
+import Loader from "../common/Loader";
 
 const DashBoardSideBar = () => {
   const [isSideBarVisible, setIsSideBarVisible] = useState("false");
   const { userRole, isUserRolePending } = useRole();
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
 
   const handleSideBar = () => {
     setIsSideBarVisible(!isSideBarVisible);
@@ -36,6 +37,8 @@ const DashBoardSideBar = () => {
         });
       });
   };
+
+  if (isUserRolePending) return <Loader />;
 
   return (
     <>

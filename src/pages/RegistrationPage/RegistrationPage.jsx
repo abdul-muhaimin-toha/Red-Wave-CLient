@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "@/hooks/auth/useAuth";
@@ -38,12 +38,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import useAxiosPublic from "@/hooks/axios/useAxiosPublic";
+import Loader from "@/components/common/Loader";
 
 const RegistrationPage = () => {
   const [picture, setPicture] = useState(null);
   const { toast } = useToast();
   const navigate = useNavigate();
-  const location = useLocation();
   const axiosPublic = useAxiosPublic();
   const { districts, isDistrictsPending } = useDistricts();
   const { upazilas, isUpazilasPending } = useUpazilas();
@@ -176,7 +176,7 @@ const RegistrationPage = () => {
       });
   }
 
-  if (isDistrictsPending || isUpazilasPending) return;
+  if (isDistrictsPending || isUpazilasPending) return <Loader />;
 
   return (
     <section>

@@ -1,3 +1,4 @@
+import Loader from "@/components/common/Loader";
 import {
   Card,
   CardContent,
@@ -6,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import useSingleBlog from "@/hooks/getDataFromDB/useSingleBlog";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   FacebookIcon,
   FacebookShareButton,
@@ -19,12 +20,13 @@ import {
 const SingleBlog = () => {
   const { id } = useParams();
   const { singleBlog, isSingleBlogPending } = useSingleBlog(id);
-  const location = useLocation();
   const currentPage = window.location.href;
 
   const content = (
     <div dangerouslySetInnerHTML={{ __html: singleBlog.content }} />
   );
+
+  if (isSingleBlogPending) return <Loader />;
 
   return (
     <section>

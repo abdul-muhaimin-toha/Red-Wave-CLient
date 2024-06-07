@@ -11,9 +11,8 @@ import {
 import { BsThreeDots } from "react-icons/bs";
 import useAxiosSecure from "@/hooks/axios/useAxiosSecure";
 import { toast } from "../ui/use-toast";
-import useUser from "@/hooks/getDataFromDB/useUser";
-import useAuth from "@/hooks/auth/useAuth";
 import useRole from "@/hooks/getDataFromDB/useRole";
+import Loader from "../common/Loader";
 
 const ContentManagementTableRow = ({ blog, refetch }) => {
   const axiosSecure = useAxiosSecure();
@@ -63,6 +62,8 @@ const ContentManagementTableRow = ({ blog, refetch }) => {
         });
       });
   };
+
+  if (isUserRolePending) return <Loader />;
 
   return (
     <TableRow>

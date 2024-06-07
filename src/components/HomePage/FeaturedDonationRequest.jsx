@@ -8,9 +8,12 @@ import {
 } from "../ui/card";
 
 import FeaturedDonationCard from "./FeaturedDonationCard";
+import Loader from "../common/Loader";
 
 const FeaturedDonationRequest = () => {
   const { recentDonations, isRecentDonationPending } = useRecentDonation();
+
+  if (isRecentDonationPending) return <Loader />;
 
   return (
     <section>

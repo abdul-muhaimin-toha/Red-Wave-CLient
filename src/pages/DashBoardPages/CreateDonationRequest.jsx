@@ -23,6 +23,7 @@ import useAxiosSecure from "@/hooks/axios/useAxiosSecure";
 import { toast } from "@/components/ui/use-toast";
 import { useNavigate } from "react-router-dom";
 import useUser from "@/hooks/getDataFromDB/useUser";
+import Loader from "@/components/common/Loader";
 
 const CreateDonationRequest = () => {
   const [date, setDate] = useState();
@@ -30,7 +31,7 @@ const CreateDonationRequest = () => {
   const { districts, isDistrictsPending } = useDistricts();
   const { upazilas, isUpazilasPending } = useUpazilas();
   const { user } = useAuth();
-  const { userFromDB } = useUser(user.email);
+  const { userFromDB, isUserFromDBPending } = useUser(user.email);
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
 
@@ -83,7 +84,8 @@ const CreateDonationRequest = () => {
       .catch((err) => console.log(err.message));
   };
 
-  if (isDistrictsPending || isUpazilasPending) return;
+  if (isDistrictsPending || isUpazilasPending || isUserFromDBPending)
+    return <Loader />;
 
   return (
     <section>

@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import useAuth from "@/hooks/auth/useAuth";
 import useDistricts from "@/hooks/getDataFromDB/useDistricts";
 import useUpazilas from "@/hooks/getDataFromDB/useUpazilas";
 import { useEffect, useState } from "react";
@@ -23,10 +22,12 @@ import useAxiosSecure from "@/hooks/axios/useAxiosSecure";
 import { toast } from "@/components/ui/use-toast";
 import useSingleDonationRequest from "@/hooks/getDataFromDB/useSingleDonationRequest";
 import { useNavigate, useParams } from "react-router-dom";
+import Loader from "@/components/common/Loader";
 
 const UpdateDonationRequest = () => {
   const { id } = useParams();
-  const { donationRequestSingle, refetch } = useSingleDonationRequest(id);
+  const { donationRequestSingle, isDonationRequestSinglePending, refetch } =
+    useSingleDonationRequest(id);
   const [date, setDate] = useState();
   const [time, setTime] = useState("");
   const { districts, isDistrictsPending } = useDistricts();
@@ -86,7 +87,8 @@ const UpdateDonationRequest = () => {
       });
   };
 
-  if (isDistrictsPending || isUpazilasPending) return;
+  if (isDistrictsPending || isUpazilasPending || isDonationRequestSinglePending)
+    return <Loader />;
 
   console.log(donationRequestSingle._id, "ffffff");
 
