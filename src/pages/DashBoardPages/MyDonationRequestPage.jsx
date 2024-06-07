@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/table";
 import useAuth from "@/hooks/auth/useAuth";
 import useDonationRequestforUser from "@/hooks/getDataFromDB/useDonationRequestforUser";
-import DonationRequestTableRow from "@/components/dashBoard/DonationRequestTable/DonationRequestTableRow";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,14 +17,22 @@ import {
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import DonationRequestTableRowForDonor from "@/components/dashBoard/DonationRequestTable/DonationRequestTableRowForDonor";
+import PaginationComponent from "@/components/common/PaginationComponent";
+import useTotalDonationRequestForUser from "@/hooks/getDataFromDB/useTotalDonationRequestForUser";
 
 const MyDonationRequestPage = () => {
+  const [currentPage, setCurrentPage] = useState(0);
   const [filterValue, setFilterValue] = useState("");
   const { user } = useAuth();
+  const postPerPage = 6;
   const { donationRequestForUser, refetch } = useDonationRequestforUser(
     user.email,
     filterValue,
+    postPerPage,
+    currentPage,
   );
+  const { totalDonationRequestForUser, isTotalDonationRequestForUserPending } =
+    useTotalDonationRequestForUser(user.email, filterValue);
 
   return (
     <div className="mx-auto max-w-screen-2xl  px-4">
@@ -91,6 +99,14 @@ const MyDonationRequestPage = () => {
               ))}
             </TableBody>
           </Table>
+          <div className="pt-10 md:pt-16">
+            <PaginationComponent
+              postPerPage={postPerPage}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              totalPost={totalDonationRequestForUser}
+            />
+          </div>
         </div>
       </div>
     </div>
