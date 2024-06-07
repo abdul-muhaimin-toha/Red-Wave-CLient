@@ -7,13 +7,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { toast } from "@/components/ui/use-toast";
 import useDistricts from "@/hooks/getDataFromDB/useDistricts";
 import useDonorBySearch from "@/hooks/getDataFromDB/useDonorBySearch";
 import useUpazilas from "@/hooks/getDataFromDB/useUpazilas";
 import { Label } from "@radix-ui/react-dropdown-menu";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useReactToPrint } from "react-to-print";
 
 const SearchPage = () => {
+  const searchResultPDF = useRef();
   const { districts, isDistrictsPending } = useDistricts();
   const { upazilas, isUpazilasPending } = useUpazilas();
   const [selectedBloodGroup, setSelectedBloodGroup] = useState(null);
@@ -32,6 +35,15 @@ const SearchPage = () => {
     setSelectedDistrict(e.target.district.value);
     setSelectedUpazila(e.target.upazila.value);
   };
+
+  const generatePDF = useReactToPrint({
+    content: () => searchResultPDF.current,
+    documentTitle: "BloodDonorList",
+    onAfterPrint: () =>
+      toast({
+        title: "Successfully PDF generated!",
+      }),
+  });
 
   return (
     <div>
@@ -105,6 +117,13 @@ const SearchPage = () => {
                     Search Now
                   </Button>
                 </form>
+                {!!allDonor.length && (
+                  <div className="mt-4 flex justify-end">
+                    <Button onClick={generatePDF} className="w-full md:w-auto">
+                      Print PDF
+                    </Button>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </div>
@@ -118,7 +137,11 @@ const SearchPage = () => {
                 No donor avaiable for your search!
               </h3>
             )}
-            <div className="grid w-full grid-cols-1 gap-8  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+
+            <div
+              ref={searchResultPDF}
+              className="grid w-full grid-cols-1 gap-8  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+            >
               {allDonor.map((donor) => (
                 <SearchDonorCard key={donor._id} donor={donor} />
               ))}
