@@ -23,6 +23,7 @@ import { toast } from "@/components/ui/use-toast";
 import useSingleDonationRequest from "@/hooks/getDataFromDB/useSingleDonationRequest";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "@/components/common/Loader";
+import { Helmet } from "react-helmet-async";
 
 const UpdateDonationRequest = () => {
   const { id } = useParams();
@@ -94,6 +95,9 @@ const UpdateDonationRequest = () => {
 
   return (
     <section>
+      <Helmet>
+        <title>Red Wave - Update Donation Request</title>
+      </Helmet>
       <div className="mx-auto max-w-screen-2xl px-4">
         <div className="flex items-center justify-center">
           <div className="w-full border-2 p-3 md:w-4/5 md:p-8 lg:w-3/5 xl:w-2/5 ">

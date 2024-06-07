@@ -4,7 +4,7 @@ import useAuth from "../auth/useAuth";
 import { useEffect } from "react";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://red-wave-server.vercel.app",
 });
 
 const useAxiosSecure = () => {

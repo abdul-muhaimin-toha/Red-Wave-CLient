@@ -14,6 +14,7 @@ import useDonorBySearch from "@/hooks/getDataFromDB/useDonorBySearch";
 import useUpazilas from "@/hooks/getDataFromDB/useUpazilas";
 import { Label } from "@radix-ui/react-dropdown-menu";
 import { useRef, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useReactToPrint } from "react-to-print";
 
 const SearchPage = () => {
@@ -51,6 +52,9 @@ const SearchPage = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Red Wave - Search Donor</title>
+      </Helmet>
       <section>
         <div className="mx-auto max-w-screen-2xl px-4">
           <div className="flex items-center justify-center">

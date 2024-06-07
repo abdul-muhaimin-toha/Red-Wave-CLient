@@ -10,6 +10,7 @@ import useUpazilas from "@/hooks/getDataFromDB/useUpazilas";
 import useUser from "@/hooks/getDataFromDB/useUser";
 import { imageUpload } from "@/utils/imageUpload";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const Profile = () => {
   const [updateModeOn, setUpdateModeOn] = useState(false);
@@ -102,6 +103,9 @@ const Profile = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Red Wave - Profile</title>
+      </Helmet>
       {updateModeOn ? (
         <section>
           <div className="mx-auto max-w-screen-2xl px-4">

@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import useAllFunds from "@/hooks/getDataFromDB/useAllFunds";
+import { Helmet } from "react-helmet-async";
 
 const Funding = () => {
   const { allFunds, isAllFundsPending, refetch } = useAllFunds();
@@ -17,6 +18,9 @@ const Funding = () => {
 
   return (
     <div className="mx-auto max-w-screen-2xl px-4 py-16">
+      <Helmet>
+        <title>Red Wave - Funds</title>
+      </Helmet>
       <div className="flex items-center justify-center ">
         <div className="w-full rounded-md border-2 p-5  md:p-8 lg:w-4/5 xl:w-4/5 ">
           <div className="flex justify-end pb-10">

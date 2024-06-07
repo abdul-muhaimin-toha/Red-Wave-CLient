@@ -8,6 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import usePendingDonationRequest from "@/hooks/getDataFromDB/usePendingDonationRequest";
+import { Helmet } from "react-helmet-async";
 
 const BloodDonationRequest = () => {
   const { pendingDonationRequest, isPendingDonationRequestPending } =
@@ -17,6 +18,9 @@ const BloodDonationRequest = () => {
 
   return (
     <div className="mx-auto max-w-screen-2xl px-4">
+      <Helmet>
+        <title>Red Wave - Donation Requests</title>
+      </Helmet>
       <div className="flex items-center justify-center ">
         <div className=" my-16 w-full rounded-md border-2 p-5  md:p-8 lg:w-4/5 xl:w-4/5 ">
           <div className="mx-auto max-w-2xl text-center md:p-6">

@@ -19,6 +19,7 @@ import useRole from "@/hooks/getDataFromDB/useRole";
 import PaginationComponent from "@/components/common/PaginationComponent";
 import useTotalDonationRequest from "@/hooks/getDataFromDB/useTotalDonationRequest";
 import Loader from "@/components/common/Loader";
+import { Helmet } from "react-helmet-async";
 
 const AllDonationRequestPage = () => {
   const [filterValue, setFilterValue] = useState("");
@@ -39,6 +40,9 @@ const AllDonationRequestPage = () => {
 
   return (
     <div className="mx-auto max-w-screen-2xl  px-4">
+      <Helmet>
+        <title>Red Wave - All Donation Requests</title>
+      </Helmet>
       <div className="flex items-center justify-center ">
         <div className="w-full rounded-md border-2 p-5  md:p-8 lg:w-4/5 xl:w-4/5 ">
           <div className="mx-auto max-w-2xl text-center md:p-6">

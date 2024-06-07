@@ -7,18 +7,21 @@ import { router } from "./routes/Routes";
 import AuthContextProvider from "./contexts/auth/AuthContextProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "./components/ui/toaster";
+import { HelmetProvider } from "react-helmet-async";
 
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ThemeProvider storageKey="vite-ui-theme">
-      <AuthContextProvider>
-        <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
-          <Toaster />
-        </QueryClientProvider>
-      </AuthContextProvider>
-    </ThemeProvider>
+    <HelmetProvider>
+      <ThemeProvider storageKey="vite-ui-theme">
+        <AuthContextProvider>
+          <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+            <Toaster />
+          </QueryClientProvider>
+        </AuthContextProvider>
+      </ThemeProvider>
+    </HelmetProvider>
   </React.StrictMode>,
 );

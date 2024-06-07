@@ -20,6 +20,7 @@ import DonationRequestTableRowForDonor from "@/components/dashBoard/DonationRequ
 import PaginationComponent from "@/components/common/PaginationComponent";
 import useTotalDonationRequestForUser from "@/hooks/getDataFromDB/useTotalDonationRequestForUser";
 import Loader from "@/components/common/Loader";
+import { Helmet } from "react-helmet-async";
 
 const MyDonationRequestPage = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -45,6 +46,9 @@ const MyDonationRequestPage = () => {
 
   return (
     <div className="mx-auto max-w-screen-2xl  px-4">
+      <Helmet>
+        <title>Red Wave - My Donation Requests</title>
+      </Helmet>
       <div className="flex items-center justify-center ">
         <div className="w-full rounded-md border-2 p-5  md:p-8 lg:w-4/5 xl:w-4/5 ">
           <div className="mx-auto max-w-2xl text-center md:p-6">

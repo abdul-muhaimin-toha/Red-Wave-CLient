@@ -39,6 +39,7 @@ import {
 } from "@/components/ui/form";
 import useAxiosPublic from "@/hooks/axios/useAxiosPublic";
 import Loader from "@/components/common/Loader";
+import { Helmet } from "react-helmet-async";
 
 const RegistrationPage = () => {
   const [picture, setPicture] = useState(null);
@@ -180,6 +181,9 @@ const RegistrationPage = () => {
 
   return (
     <section>
+      <Helmet>
+        <title>Red Wave - Registration</title>
+      </Helmet>
       <div className="mx-auto max-w-screen-2xl px-4">
         <div className="flex items-center justify-center">
           <Card className="my-16 w-full md:my-24 md:w-4/5 md:p-3 lg:w-3/5 xl:w-2/5">

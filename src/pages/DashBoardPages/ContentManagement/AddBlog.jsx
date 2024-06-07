@@ -6,6 +6,7 @@ import useAxiosSecure from "@/hooks/axios/useAxiosSecure";
 import { imageUpload } from "@/utils/imageUpload";
 import JoditEditor from "jodit-react";
 import { useRef, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 
 const AddBlog = () => {
@@ -54,6 +55,9 @@ const AddBlog = () => {
 
   return (
     <section>
+      <Helmet>
+        <title>Red Wave - Add Blogs</title>
+      </Helmet>
       <div className="mx-auto max-w-screen-2xl px-4">
         <div className="flex items-center justify-center">
           <div className="w-full border-2 p-3 md:w-4/5 md:p-8 lg:w-3/5 xl:w-3/5 ">

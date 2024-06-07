@@ -3,6 +3,7 @@ import AdminDashBoard from "./DashBoardHomePages/AdminDashBoard";
 import DonationRequestTable from "@/components/dashBoard/DonationRequestTable/DonationRequestTable";
 import useRole from "@/hooks/getDataFromDB/useRole";
 import Loader from "@/components/common/Loader";
+import { Helmet } from "react-helmet-async";
 
 const DashBoardHome = () => {
   const { user } = useAuth();
@@ -13,6 +14,9 @@ const DashBoardHome = () => {
   return (
     <>
       <section>
+        <Helmet>
+          <title>Red Wave - Dashboard</title>
+        </Helmet>
         <div className="mx-4 mb-10">
           <div className="flex items-center justify-center">
             <div className="max-w-screen-2xl ">

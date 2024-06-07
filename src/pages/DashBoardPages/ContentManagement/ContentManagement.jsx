@@ -17,6 +17,7 @@ import {
 import useAllBlogs from "@/hooks/getDataFromDB/useAllBlogs";
 import useRole from "@/hooks/getDataFromDB/useRole";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
 const ContentManagement = () => {
@@ -28,6 +29,9 @@ const ContentManagement = () => {
 
   return (
     <section>
+      <Helmet>
+        <title>Red Wave - All Blogs</title>
+      </Helmet>
       <div className="mx-auto max-w-screen-2xl  px-4">
         <div className="flex items-center justify-center ">
           <div className="w-full rounded-md border-2 p-5  md:p-8 lg:w-4/5 xl:w-4/5 ">

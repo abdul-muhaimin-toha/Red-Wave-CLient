@@ -24,6 +24,7 @@ import useAuth from "@/hooks/auth/useAuth";
 import useAxiosSecure from "@/hooks/axios/useAxiosSecure";
 
 import useSingleDonationRequest from "@/hooks/getDataFromDB/useSingleDonationRequest";
+import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams } from "react-router-dom";
 
 const BloodDonationRequestDetails = () => {
@@ -80,6 +81,9 @@ const BloodDonationRequestDetails = () => {
 
   return (
     <section>
+      <Helmet>
+        <title>Red Wave - Donation Post Details</title>
+      </Helmet>
       <div className="mx-auto max-w-screen-2xl px-4">
         <div className="flex items-center justify-center">
           <Card className="my-16 w-full md:my-24 md:w-4/5 md:p-3 lg:w-3/5 xl:w-2/5">

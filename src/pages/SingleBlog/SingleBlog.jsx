@@ -7,6 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import useSingleBlog from "@/hooks/getDataFromDB/useSingleBlog";
+import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import {
   FacebookIcon,
@@ -30,6 +31,9 @@ const SingleBlog = () => {
 
   return (
     <section>
+      <Helmet>
+        <title>Red Wave - Blog</title>
+      </Helmet>
       <div className="mx-auto max-w-screen-2xl px-4">
         <div className="flex items-center justify-center">
           <Card className="my-16 w-full md:my-24 md:w-4/5 md:p-3 lg:w-3/5 xl:w-2/5">
