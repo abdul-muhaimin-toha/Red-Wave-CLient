@@ -1,10 +1,26 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import useSingleBlog from "@/hooks/getDataFromDB/useSingleBlog";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+} from "react-share";
 
 const SingleBlog = () => {
   const { id } = useParams();
   const { singleBlog, isSingleBlogPending } = useSingleBlog(id);
+  const location = useLocation();
+  const currentPage = window.location.href;
 
   const content = (
     <div dangerouslySetInnerHTML={{ __html: singleBlog.content }} />
@@ -30,6 +46,20 @@ const SingleBlog = () => {
               </div>
               <div>{content}</div>
             </CardContent>
+            <CardFooter className="flex items-center gap-4">
+              <h3 className="font-bold text-primary">Share Now:</h3>
+              <div className="flex gap-2">
+                <TwitterShareButton url={currentPage}>
+                  <TwitterIcon size={25} round={true} />
+                </TwitterShareButton>
+                <FacebookShareButton url={currentPage}>
+                  <FacebookIcon size={25} round={true} />
+                </FacebookShareButton>
+                <WhatsappShareButton url={currentPage}>
+                  <WhatsappIcon size={25} round={true} />
+                </WhatsappShareButton>
+              </div>
+            </CardFooter>
           </Card>
         </div>
       </div>
