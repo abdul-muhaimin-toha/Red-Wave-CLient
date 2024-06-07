@@ -4,8 +4,10 @@ import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper/modules";
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
+import useAuth from "@/hooks/auth/useAuth";
 
 const Hero = () => {
+  const { user } = useAuth();
   return (
     <section className="relative z-30">
       <Swiper
@@ -55,11 +57,19 @@ const Hero = () => {
             Matters More Than Ever.
           </p>
           <div className="flex flex-col justify-center gap-3 md:flex-row  md:gap-6">
-            <Link to="/registration">
-              <Button size="lg" className="uppercase">
-                Join as a donor
-              </Button>
-            </Link>
+            {user ? (
+              <Link to="/dashboard/create-donation-request">
+                <Button size="lg" className="uppercase">
+                  Create Donation Request
+                </Button>
+              </Link>
+            ) : (
+              <Link to="/registration">
+                <Button size="lg" className="uppercase">
+                  Join as a donor
+                </Button>
+              </Link>
+            )}
             <Link to="/search">
               <Button size="lg" className="uppercase">
                 Search donors

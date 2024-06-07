@@ -10,6 +10,7 @@ import { BiDonateHeart, BiLogOut } from "react-icons/bi";
 import { CiPen } from "react-icons/ci";
 import useRole from "@/hooks/getDataFromDB/useRole";
 import { toast } from "../ui/use-toast";
+import ThemeToggler from "../theme/ThemeToggler";
 
 const DashBoardSideBar = () => {
   const [isSideBarVisible, setIsSideBarVisible] = useState("false");
@@ -47,9 +48,12 @@ const DashBoardSideBar = () => {
                   Red Wave
                 </h3>
               </Link>
-              <Button onClick={handleSideBar} size="icon" variant="outline">
-                <HamburgerMenuIcon className="h-6 w-6" />
-              </Button>
+              <div className="flex items-center justify-center gap-4">
+                <ThemeToggler />
+                <Button onClick={handleSideBar} size="icon" variant="outline">
+                  <HamburgerMenuIcon className="h-6 w-6" />
+                </Button>
+              </div>
             </div>
           </div>
         </div>
@@ -57,12 +61,15 @@ const DashBoardSideBar = () => {
       <div
         className={`fixed z-50 flex h-screen w-64 ${isSideBarVisible ? "" : "-translate-x-full"} flex-col space-y-6 border-r-2 bg-background px-3  md:translate-x-0 `}
       >
-        <div className="my-8 flex h-full flex-col divide-y divide-gray-700">
-          <NavLink to="/">
-            <h3 className="px-3 pb-6  text-xl font-bold uppercase text-primary">
-              Red Wave
-            </h3>
-          </NavLink>
+        <div className="my-8  flex h-full flex-col divide-y divide-gray-700">
+          <div className="flex items-center justify-between pb-6">
+            <NavLink to="/">
+              <h3 className="px-3 text-xl font-bold uppercase text-primary">
+                Red Wave
+              </h3>
+            </NavLink>
+            <ThemeToggler />
+          </div>
           <ul className="flex-1 space-y-3 pb-4 pt-2 text-sm">
             <li>
               <NavLink

@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 
 const FeaturedDonationCard = ({ donation }) => {
   const {
+    _id,
     recipient_name,
     recipient_upazila,
     recipient_district,
@@ -35,9 +37,11 @@ const FeaturedDonationCard = ({ donation }) => {
         <p className="mt-1">{requester_name}</p>
         <p className="mt-1">{requester_email}</p>
       </div>
-      <Button size="sm" className="mt-4 self-end">
-        View Details
-      </Button>
+      <Link to={`/blood-donation-request-details/${_id}`} className="self-end">
+        <Button size="sm" className="mt-4 ">
+          View Details
+        </Button>
+      </Link>
     </div>
   );
 };

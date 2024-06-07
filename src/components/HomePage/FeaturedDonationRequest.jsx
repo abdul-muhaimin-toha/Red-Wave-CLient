@@ -11,7 +11,6 @@ import FeaturedDonationCard from "./FeaturedDonationCard";
 
 const FeaturedDonationRequest = () => {
   const { recentDonations, isRecentDonationPending } = useRecentDonation();
-  console.log(recentDonations);
 
   return (
     <section>

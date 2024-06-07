@@ -27,7 +27,10 @@ const ContactUs = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form className="my-8 grid gap-5">
+              <form
+                onSubmit={(e) => e.preventDefault()}
+                className="my-8 grid gap-5"
+              >
                 <div className="grid gap-2">
                   <Label htmlFor="name">Name</Label>
                   <Input
