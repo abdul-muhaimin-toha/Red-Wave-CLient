@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -21,6 +22,10 @@ const BlogPageCard = ({ blog }) => {
       </div>
     </div>
   );
+};
+
+BlogPageCard.propTypes = {
+  blog: PropTypes.object,
 };
 
 export default BlogPageCard;

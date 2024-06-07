@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -162,6 +163,11 @@ const AllUsersTableRow = ({ user, refetch }) => {
       </TableHead>
     </TableRow>
   );
+};
+
+AllUsersTableRow.propTypes = {
+  user: PropTypes.object,
+  refetch: PropTypes.func,
 };
 
 export default AllUsersTableRow;

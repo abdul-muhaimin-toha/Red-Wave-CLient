@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const SearchDonorCard = ({ donor }) => {
   const { name, email, bloodGroup, upazila, district, image_url } = donor;
   return (
@@ -16,6 +18,10 @@ const SearchDonorCard = ({ donor }) => {
       </p>
     </div>
   );
+};
+
+SearchDonorCard.propTypes = {
+  donor: PropTypes.object,
 };
 
 export default SearchDonorCard;

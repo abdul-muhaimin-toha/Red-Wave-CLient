@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 import { TableHead, TableRow } from "../ui/table";
 import { Button } from "../ui/button";
 import {
@@ -115,6 +115,11 @@ const ContentManagementTableRow = ({ blog, refetch }) => {
       )}
     </TableRow>
   );
+};
+
+ContentManagementTableRow.propTypes = {
+  blog: PropTypes.object,
+  refetch: PropTypes.func,
 };
 
 export default ContentManagementTableRow;

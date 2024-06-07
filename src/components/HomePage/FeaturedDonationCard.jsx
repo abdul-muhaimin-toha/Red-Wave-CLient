@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 
@@ -44,6 +45,10 @@ const FeaturedDonationCard = ({ donation }) => {
       </Link>
     </div>
   );
+};
+
+FeaturedDonationCard.propTypes = {
+  donation: PropTypes.object,
 };
 
 export default FeaturedDonationCard;

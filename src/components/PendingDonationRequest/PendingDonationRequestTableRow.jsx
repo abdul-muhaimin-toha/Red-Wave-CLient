@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import { Button } from "../ui/button";
 import { TableCell, TableRow } from "../ui/table";
@@ -29,6 +30,10 @@ const PendingDonationRequestTableRow = ({ donation }) => {
       </TableCell>
     </TableRow>
   );
+};
+
+PendingDonationRequestTableRow.propTypes = {
+  donation: PropTypes.object,
 };
 
 export default PendingDonationRequestTableRow;

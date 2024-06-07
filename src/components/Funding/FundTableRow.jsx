@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { TableCell, TableRow } from "../ui/table";
 
 const FundTableRow = ({ fund }) => {
@@ -8,6 +9,10 @@ const FundTableRow = ({ fund }) => {
       <TableCell>{new Date(fund.date).toLocaleDateString()}</TableCell>
     </TableRow>
   );
+};
+
+FundTableRow.propTypes = {
+  fund: PropTypes.object,
 };
 
 export default FundTableRow;

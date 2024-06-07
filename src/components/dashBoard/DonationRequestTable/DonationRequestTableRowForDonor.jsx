@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -154,6 +155,12 @@ const DonationRequestTableRowForDonor = ({
       )}
     </TableRow>
   );
+};
+
+DonationRequestTableRowForDonor.propTypes = {
+  donation: PropTypes.object,
+  refetch: PropTypes.func,
+  refetchTotal: PropTypes.func,
 };
 
 export default DonationRequestTableRowForDonor;

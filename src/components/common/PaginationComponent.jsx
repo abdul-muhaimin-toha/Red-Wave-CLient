@@ -83,7 +83,6 @@ PaginationComponent.propTypes = {
   postPerPage: PropTypes.number,
   currentPage: PropTypes.number,
   setCurrentPage: PropTypes.func,
-  search: PropTypes.string,
   totalPost: PropTypes.number,
 };
 

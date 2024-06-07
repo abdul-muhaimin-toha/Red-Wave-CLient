@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Logo from "../../assets/logo.svg";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { Button } from "../ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
@@ -51,6 +50,7 @@ const NavbarMain = () => {
         window.removeEventListener("scroll", controlNavbar);
       };
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lastScrollY]);
 
   const handleLogOut = () => {

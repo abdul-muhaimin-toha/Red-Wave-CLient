@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import "./checkoutForm.css";
 import { Button } from "../ui/button";
@@ -129,6 +130,11 @@ const CheckoutForm = ({ amount, refetch }) => {
       {cardError && <p className="mt-2 text-sm text-red-600">{cardError}</p>}
     </>
   );
+};
+
+CheckoutForm.propTypes = {
+  amount: PropTypes.number,
+  refetch: PropTypes.func,
 };
 
 export default CheckoutForm;

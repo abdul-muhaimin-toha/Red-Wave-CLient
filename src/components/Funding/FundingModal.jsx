@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Button } from "../ui/button";
 import {
   Dialog,
@@ -69,6 +70,10 @@ const FundingModal = ({ refetch }) => {
       </DialogContent>
     </Dialog>
   );
+};
+
+FundingModal.propTypes = {
+  refetch: PropTypes.func,
 };
 
 export default FundingModal;
