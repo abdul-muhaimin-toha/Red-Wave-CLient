@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../axios/useAxiosSecure";
 
-const useAllDonationRequest = (filterValue) => {
+const useAllDonationRequest = (filterValue, postPerPage, currentPage) => {
   const axiosSecure = useAxiosSecure();
   const {
     data: allDonationRequest = [],
@@ -10,11 +10,11 @@ const useAllDonationRequest = (filterValue) => {
     isError,
     error,
   } = useQuery({
-    queryKey: ["all-donation-request", filterValue],
+    queryKey: ["all-donation-request", filterValue, postPerPage, currentPage],
     enabled: !!sessionStorage.getItem("access-token"),
     queryFn: async () => {
       const response = await axiosSecure.get(
-        `/donation-requests?status=${filterValue}`,
+        `/donation-requests?status=${filterValue}&postPerPage=${postPerPage}&currentPage=${currentPage}`,
       );
 
       return response.data;

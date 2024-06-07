@@ -18,11 +18,21 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import useAllDonationRequest from "@/hooks/getDataFromDB/useAllDonationRequest";
 import useRole from "@/hooks/getDataFromDB/useRole";
+import PaginationComponent from "@/components/common/PaginationComponent";
+import useTotalDonationRequest from "@/hooks/getDataFromDB/useTotalDonationRequest";
 
 const AllDonationRequestPage = () => {
   const [filterValue, setFilterValue] = useState("");
+  const [currentPage, setCurrentPage] = useState(0);
   const { userRole, isUserRolePending } = useRole();
-  const { allDonationRequest, refetch } = useAllDonationRequest(filterValue);
+  const postPerPage = 6;
+  const { allDonationRequest, refetch } = useAllDonationRequest(
+    filterValue,
+    postPerPage,
+    currentPage,
+  );
+  const { totalDonationRequest, isTotalDonationRequestPending, refetchTotal } =
+    useTotalDonationRequest(filterValue);
 
   return (
     <div className="mx-auto max-w-screen-2xl  px-4">
@@ -88,10 +98,19 @@ const AllDonationRequestPage = () => {
                   refetch={refetch}
                   key={donation._id}
                   donation={donation}
+                  refetchTotal={refetchTotal}
                 />
               ))}
             </TableBody>
           </Table>
+          <div className="pt-10 md:pt-16">
+            <PaginationComponent
+              postPerPage={postPerPage}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              totalPost={totalDonationRequest}
+            />
+          </div>
         </div>
       </div>
     </div>

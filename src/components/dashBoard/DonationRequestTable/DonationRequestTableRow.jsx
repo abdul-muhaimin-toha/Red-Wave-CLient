@@ -19,7 +19,7 @@ import { FaArrowAltCircleRight, FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const DonationRequestTableRow = ({ donation, refetch }) => {
+const DonationRequestTableRow = ({ donation, refetch, refetchTotal }) => {
   const axiosSecure = useAxiosSecure();
   const { userRole, isUserRolePending } = useRole();
   const {
@@ -53,6 +53,7 @@ const DonationRequestTableRow = ({ donation, refetch }) => {
             if (res.data.deletedCount > 0) {
               console.log(res.data);
               refetch();
+              refetchTotal();
               Swal.fire({
                 title: "Deleted!",
                 text: "Your file has been deleted.",
@@ -77,6 +78,7 @@ const DonationRequestTableRow = ({ donation, refetch }) => {
       .then((res) => {
         console.log(res.data);
         refetch();
+        refetchTotal();
         toast({
           title: "Status updated",
         });
