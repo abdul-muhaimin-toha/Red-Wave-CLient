@@ -31,8 +31,11 @@ const MyDonationRequestPage = () => {
     postPerPage,
     currentPage,
   );
-  const { totalDonationRequestForUser, isTotalDonationRequestForUserPending } =
-    useTotalDonationRequestForUser(user.email, filterValue);
+  const {
+    totalDonationRequestForUser,
+    isTotalDonationRequestForUserPending,
+    refetchTotal,
+  } = useTotalDonationRequestForUser(user.email, filterValue);
 
   return (
     <div className="mx-auto max-w-screen-2xl  px-4">
@@ -95,6 +98,7 @@ const MyDonationRequestPage = () => {
                   refetch={refetch}
                   key={donation._id}
                   donation={donation}
+                  refetchTotal={refetchTotal}
                 />
               ))}
             </TableBody>

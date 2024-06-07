@@ -18,7 +18,11 @@ import { FaArrowAltCircleRight, FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const DonationRequestTableRowForDonor = ({ donation, refetch }) => {
+const DonationRequestTableRowForDonor = ({
+  donation,
+  refetch,
+  refetchTotal,
+}) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const { userFromDB } = useUser(user.email);
@@ -40,7 +44,7 @@ const DonationRequestTableRowForDonor = ({ donation, refetch }) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
-      icon: "warning",
+      icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
@@ -53,6 +57,7 @@ const DonationRequestTableRowForDonor = ({ donation, refetch }) => {
             if (res.data.deletedCount > 0) {
               console.log(res.data);
               refetch();
+              refetchTotal();
               Swal.fire({
                 title: "Deleted!",
                 text: "Your file has been deleted.",

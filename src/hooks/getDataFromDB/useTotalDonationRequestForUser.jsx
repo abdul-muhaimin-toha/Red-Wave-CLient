@@ -6,7 +6,7 @@ const useTotalDonationRequestForUser = (userEmail, filter) => {
   const {
     data: totalDonationRequestForUser = 0,
     isPending: isTotalDonationRequestForUserPending,
-    refetch,
+    refetch: refetchTotal,
     isError,
     error,
   } = useQuery({
@@ -24,7 +24,7 @@ const useTotalDonationRequestForUser = (userEmail, filter) => {
   return {
     totalDonationRequestForUser,
     isTotalDonationRequestForUserPending,
-    refetch,
+    refetchTotal,
     isError,
     error,
   };
