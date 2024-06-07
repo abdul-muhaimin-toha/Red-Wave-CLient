@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../axios/useAxiosSecure";
 
-const useAllUsers = (filterValue) => {
+const useAllUsers = (filterValue, postPerPage, currentPage) => {
   const axiosSecure = useAxiosSecure();
 
   const {
@@ -11,10 +11,12 @@ const useAllUsers = (filterValue) => {
     isError,
     error,
   } = useQuery({
-    queryKey: ["all-users", filterValue],
+    queryKey: ["all-users", filterValue, postPerPage, currentPage],
     enabled: !!sessionStorage.getItem("access-token"),
     queryFn: async () => {
-      const response = await axiosSecure.get(`/users?status=${filterValue}`);
+      const response = await axiosSecure.get(
+        `/users?status=${filterValue}&postPerPage=${postPerPage}&currentPage=${currentPage}`,
+      );
 
       return response.data;
     },

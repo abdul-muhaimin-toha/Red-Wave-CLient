@@ -10,17 +10,26 @@ import useAllUsers from "@/hooks/getDataFromDB/useAllUsers";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import PaginationComponent from "@/components/common/PaginationComponent";
+import useTotalUsers from "@/hooks/getDataFromDB/useTotalUsers";
 
 const AllUsersTable = () => {
   const [filterValue, setFilterValue] = useState("");
+  const [currentPage, setCurrentPage] = useState(0);
+  const postPerPage = 6;
 
-  const { allUsers, refetch } = useAllUsers(filterValue);
+  const { allUsers, refetch } = useAllUsers(
+    filterValue,
+    postPerPage,
+    currentPage,
+  );
+  const { totalUsers, isTotalUsersPending } = useTotalUsers(filterValue);
+
   return (
     <div className="mx-auto max-w-screen-2xl  px-4">
       <div className="flex items-center justify-center ">
@@ -74,7 +83,14 @@ const AllUsersTable = () => {
               ))}
             </TableBody>
           </Table>
-          <div className="mt-8 text-center"></div>
+          <div className="pt-10 md:pt-16">
+            <PaginationComponent
+              postPerPage={postPerPage}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              totalPost={totalUsers}
+            />
+          </div>
         </div>
       </div>
     </div>
