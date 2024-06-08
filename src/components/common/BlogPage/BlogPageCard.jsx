@@ -13,7 +13,9 @@ const BlogPageCard = ({ blog }) => {
         />
       </div>
       <div className="space-y-1 p-6">
-        <h3 className="min-h-20 text-xl font-bold uppercase">{blog.title}</h3>
+        <h3 className=" min-h-52 text-xl font-bold uppercase        ">
+          {blog.title}
+        </h3>
         <div className="text-right">
           <Link to={`/blog/${blog._id}`}>
             <Button size="sm">Read More</Button>

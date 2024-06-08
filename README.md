@@ -8,11 +8,11 @@
 
 Red Wave is a user-friendly blood donation platform designed to facilitate seamless connections between blood donors and recipients. The platform aims to streamline the blood donation process, making it more efficient and accessible for everyone involved. Built using the MERN stack (MongoDB, Express.js, React, Node.js), Red Wave incorporates robust features for user registration, blood donation requests, donor management, content management, and role-based access control.
 
-[Live Website Link](https://voluntree-go.netlify.app/)
+[Live Website Link](https://red-wave.netlify.app/)
 
-[Client Site Repository Link](https://github.com/Porgramming-Hero-web-course/b9a11-client-side-abdul-muhaimin-toha)
+[Client Site Repository Link](https://github.com/programming-hero-web-course1/b9a12-client-side-abdul-muhaimin-toha)
 
-[Server Site Repository Link](https://github.com/Porgramming-Hero-web-course/b9a11-server-side-abdul-muhaimin-toha)
+[Server Site Repository Link](https://github.com/programming-hero-web-course1/b9a12-server-side-abdul-muhaimin-toha)
 
 ## User Types
 

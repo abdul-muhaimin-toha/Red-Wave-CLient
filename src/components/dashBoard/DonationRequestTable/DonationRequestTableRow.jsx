@@ -99,7 +99,7 @@ const DonationRequestTableRow = ({ donation, refetch, refetchTotal }) => {
       <TableCell>{`${recipient_upazila}, ${recipient_district}`}</TableCell>
       <TableCell>{new Date(donation_date).toLocaleDateString()}</TableCell>
       <TableCell>{donation_time}</TableCell>
-      <TableCell>{donation_status}</TableCell>
+      <TableCell className="capitalize">{donation_status}</TableCell>
       <TableCell>{donation_status === "inprogress" && donor_name}</TableCell>
       <TableCell>{donation_status === "inprogress" && donor_email}</TableCell>
 
