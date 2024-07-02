@@ -103,7 +103,7 @@ Red Wave leverages a powerful technology stack to deliver its features:
 - **Payment Integration:** Stripe ensures secure and efficient online payment processing.
 - **Authentication:** JWT (JSON Web Tokens) for secure and scalable user authentication.
 
-## Key npm Packages
+## Npm Packages used in this project
 
 - tanstack/react-query
 - react-hook-form
